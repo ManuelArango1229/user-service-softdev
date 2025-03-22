@@ -46,10 +46,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< Updated upstream
-    </dependencies>
-
-=======
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -62,7 +58,6 @@
         </dependency>
     </dependencies>
 
->>>>>>> Stashed changes
     <build>
         <plugins>
             <plugin>
@@ -131,7 +126,6 @@
                     </execution>
                 </executions>
             </plugin>
-<<<<<<< Updated upstream
 
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -176,10 +170,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
-=======
->>>>>>> Stashed changes
         </plugins>
     </build>
 </project>
