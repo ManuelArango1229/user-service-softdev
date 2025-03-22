@@ -26,3 +26,12 @@ jobs:
 
       - name: 🧪 Ejecutar pruebas
         run: mvn test
+
+      - name: 🧪 Ejecutar pruebas con cobertura
+        run: mvn test jacoco:report
+
+      - name: 📂 Guardar Reporte de JaCoCo
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
