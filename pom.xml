@@ -77,14 +77,17 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.2.0</version>
-          <executions>
-            <execution>
-              <phase>validate</phase>
-                <goals>
-                  <goal>check</goal>
-                  </goals>
-                </execution>
-            </executions>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+        </executions>
+        <configuration>
+          <suppressionsLocation>config/checkstyle/suppressions.xml</suppressionsLocation>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
