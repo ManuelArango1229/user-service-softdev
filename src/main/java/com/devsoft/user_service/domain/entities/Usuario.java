@@ -31,5 +31,5 @@ public class Usuario {
     /**
      * Rol del usuario.
      */
-    private String rol;
+    private String role;
 }

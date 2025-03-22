@@ -1,7 +1,5 @@
 package com.devsoft.user_service.infraestructure.database.h2.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +19,7 @@ public class UsuarioEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
     /**
      * Atributo que representa el DNI del usuario.
      */
