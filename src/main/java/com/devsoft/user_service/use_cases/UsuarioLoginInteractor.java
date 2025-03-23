@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
+import com.devsoft.user_service.domain.services.JwtServicioPort;
 import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
 import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
-import com.devsoft.user_service.infraestructure.jwt.JwtServicio;
 import com.devsoft.user_service.infraestructure.rest.dto.UsuarioResponseDto;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class UsuarioLoginInteractor {
     private final UsuarioRepositoryPort usuarioRepository;
 
     /** Servicio para la generación y validación de tokens JWT. */
-    private final JwtServicio jwtServicio;
+    private final JwtServicioPort jwtServicio;
 
     /** Manejador de autenticación de Spring Security. */
     private final AuthenticationManager authenticationManager;
@@ -54,7 +54,7 @@ public class UsuarioLoginInteractor {
         UserDetails user = usuarioEntity;
 
         // Genera el token JWT para el usuario autenticado
-        String token = jwtServicio.obtenerToken(user);
+        String token = jwtServicio.obtenerToken(user.getUsername());
 
         // Retorna la respuesta con los datos del usuario y el token generado
         return new UsuarioResponseDto(

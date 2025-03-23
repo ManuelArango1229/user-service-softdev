@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtFiltroAutenticacion extends OncePerRequestFilter {
 
     /** Servicio para la gestión de tokens JWT. */
-    private final JwtServicio jwtServicio;
+    private final JwtServicioAdapter jwtServicio;
 
     /** Servicio para la gestión de usuarios. */
     private final UserDetailsService userDetailsService;
@@ -65,7 +65,7 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            if (jwtServicio.validarToken(token, userDetails)) {
+            if (jwtServicio.validarToken(token, userDetails.getUsername())) {
 
                 UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(
