@@ -30,7 +30,7 @@ public class UsuarioRegistroInteractor {
      * @return Usuario resgistrado
      */
     public Usuario save(final Usuario usuario) {
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword().getValue()));
         return usuarioRepository.save(usuario);
     }
 }

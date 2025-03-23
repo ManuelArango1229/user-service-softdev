@@ -1,5 +1,6 @@
 package com.devsoft.user_service.infraestructure.database.h2.entity;
 
+import com.devsoft.user_service.domain.value_objects.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,7 +40,7 @@ public class UsuarioEntity {
     /**
      * Atributo que representa el rol del usuario.
      */
-    private String rol;
+    private Role rol;
 
     /**
      * @param dniParam
@@ -52,7 +53,7 @@ public class UsuarioEntity {
             final String nombreParam,
             final String emailParam,
             final String passwordParam,
-            final String rolParam) {
+            final Role rolParam) {
         this.dni = dniParam;
         this.nombre = nombreParam;
         this.email = emailParam;
