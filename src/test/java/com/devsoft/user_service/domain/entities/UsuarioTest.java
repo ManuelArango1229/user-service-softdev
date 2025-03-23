@@ -15,7 +15,7 @@ class UsuarioTest {
 
     @BeforeEach
     void setUp() {
-        usuario = new Usuario("13435153", "John Doe", "john.doe@example.com", "jklasjdflka", "ADMIN");
+        usuario = new Usuario("13435153", "John Doe", "john.doe@example.com", "Hola123HA", "ADMINISTRADOR");
     }
 
     @Test
@@ -24,22 +24,9 @@ class UsuarioTest {
         assertAll(
                 () -> assertEquals("13435153", usuario.getDni(), "El DNI debería ser 13435153"),
                 () -> assertEquals("John Doe", usuario.getNombre(), "El nombre debería ser John Doe"),
-                () -> assertEquals("john.doe@example.com", usuario.getEmail(),
+                () -> assertEquals("john.doe@example.com", usuario.getEmail().getValue(),
                         "El email debería ser john.doe@example.com"),
-                () -> assertEquals("jklasjdflka", usuario.getPassword(), "La contraseña no coincide"),
-                () -> assertEquals("ADMIN", usuario.getRole(), "El rol no es el esperado"));
-    }
-
-    @Test
-    @Disabled("Este test esta diseñado para fallar")
-    @DisplayName("Error intencional: El DNI es incorrecto")
-    void testUsuarioCreacionConError() {
-        assertAll(
-                () -> assertNotEquals("13435153", usuario.getDni(), "Este test está diseñado para fallar"),
-                () -> assertEquals("John Doe", usuario.getNombre(), "El nombre debería ser John Doe"),
-                () -> assertEquals("john.doe@example.com", usuario.getEmail(),
-                        "El email debería ser john.doe@example.com"),
-                () -> assertEquals("jklasjdflka", usuario.getPassword(), "La contraseña no coincide"),
-                () -> assertEquals("ADMIN", usuario.getRole(), "El rol no es el esperado"));
+                () -> assertEquals("Hola123HA", usuario.getPassword().getValue(), "La contraseña no coincide"),
+                () -> assertEquals("ADMINISTRADOR", usuario.getRole().name(), "El rol no es el esperado"));
     }
 }
