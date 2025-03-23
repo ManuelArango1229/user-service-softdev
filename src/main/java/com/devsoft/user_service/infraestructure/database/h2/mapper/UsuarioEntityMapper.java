@@ -21,8 +21,8 @@ public class UsuarioEntityMapper {
     public static UsuarioEntity toUsuarioEntity(final Usuario usuario) {
         return new UsuarioEntity(usuario.getDni(),
                 usuario.getNombre(),
-                usuario.getEmail(),
-                usuario.getPassword(),
+                usuario.getEmail().getValue(),
+                usuario.getPassword().getValue(),
                 usuario.getRole());
     }
 
@@ -39,6 +39,6 @@ public class UsuarioEntityMapper {
                 usuarioEntity.getNombre(),
                 usuarioEntity.getEmail(),
                 usuarioEntity.getPassword(),
-                usuarioEntity.getRol());
+                usuarioEntity.getRol().name());
     }
 }

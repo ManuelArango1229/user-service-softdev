@@ -20,8 +20,8 @@ public class UsuarioDtoMapper {
     public static UsuarioResponseDto mapToDto(final Usuario usuario) {
         return new UsuarioResponseDto(usuario.getDni(),
                 usuario.getNombre(),
-                usuario.getEmail(),
-                usuario.getRole());
+                usuario.getEmail().getValue(),
+                usuario.getRole().name());
     }
 
     /**
