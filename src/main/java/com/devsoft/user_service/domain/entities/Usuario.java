@@ -1,16 +1,12 @@
 package com.devsoft.user_service.domain.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * La clase Usuario representa a un usuario en el sistema.
  * Contiene información básica como DNI, nombre, email, contraseña y rol.
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Usuario {
     /**
      * Identificador único del usuario.
@@ -32,4 +28,23 @@ public class Usuario {
      * Rol del usuario.
      */
     private String role;
+
+    /**
+     * @param dniParam
+     * @param nombreParam
+     * @param emailParam
+     * @param passwordParam
+     * @param roleParam
+     */
+    public Usuario(final String dniParam, final String nombreParam,
+            final String emailParam,
+            final String passwordParam,
+            final String roleParam) {
+        this.dni = dniParam;
+        this.nombre = nombreParam;
+        this.email = emailParam;
+        this.password = passwordParam;
+        this.role = roleParam;
+    }
+
 }

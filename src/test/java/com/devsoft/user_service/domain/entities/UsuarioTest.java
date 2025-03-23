@@ -1,11 +1,9 @@
 package com.devsoft.user_service.domain.entities;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 class UsuarioTest {
 
     private Usuario usuario;
