@@ -27,4 +27,9 @@ public class UsuarioResponseDto {
      * El rol del usuario en el sistema.
      */
     private String role;
+
+    /**
+     * El token JWT generado para el usuario.
+     */
+    private String token;
 }

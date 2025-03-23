@@ -1,5 +1,10 @@
 package com.devsoft.user_service.infraestructure.database.h2.entity;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.devsoft.user_service.domain.value_objects.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "usuario")
 @Data
-public class UsuarioEntity {
+public class UsuarioEntity implements UserDetails {
     /**
      * Atributo que representa el identificador único del usuario.
      */
@@ -59,5 +64,26 @@ public class UsuarioEntity {
         this.email = emailParam;
         this.password = passwordParam;
         this.rol = rolParam;
+    }
+
+    /**
+     * Retorna la colección de permisos (autoridades) concedidos al usuario.
+     *
+     * @return una colección de objetos {@code GrantedAuthority} que representan
+     *         los roles o permisos del usuario. En este caso, devuelve {@code null}.
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    /**
+     * Obtiene el nombre de usuario del usuario autenticado.
+     *
+     * @return el correo electrónico del usuario, que se utiliza como nombre de usuario.
+     */
+    @Override
+    public String getUsername() {
+        return email;
     }
 }

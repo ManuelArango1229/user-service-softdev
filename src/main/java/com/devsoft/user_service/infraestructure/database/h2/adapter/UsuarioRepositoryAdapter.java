@@ -1,5 +1,7 @@
 package com.devsoft.user_service.infraestructure.database.h2.adapter;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Component;
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
@@ -35,5 +37,19 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
                 usuarioJpaRepository
                         .save(usuarioEntity));
         return saveUser;
+    }
+
+    /**
+     * Busca un usuario por su dirección de correo electrónico y lo convierte
+     * en un objeto de dominio {@code Usuario}.
+     *
+     * @param email la dirección de correo electrónico del usuario a buscar.
+     * @return un {@code Optional<Usuario>} que contiene el usuario si existe en
+     *         la base de datos, o un {@code Optional.empty()} si no se encuentra.
+     */
+    @Override
+    public Optional<Usuario> findByEmail(final String email) {
+        return Optional.ofNullable(usuarioJpaRepository.findByEmail(email))
+                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity.get()));
     }
 }
