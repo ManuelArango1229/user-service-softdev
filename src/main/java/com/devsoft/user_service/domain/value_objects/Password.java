@@ -11,7 +11,7 @@ public class Password {
      * Expresión regular para validar una contraseña segura.
      * Debe contener al menos una minúscula, una mayúscula, un número y tener mínimo 8 caracteres.
      */
-    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+    public static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
 
     /**
      * Patrón compilado para validar contraseñas.

@@ -1,5 +1,7 @@
 package com.devsoft.user_service.domain.repositories;
 
+import java.util.Optional;
+
 import com.devsoft.user_service.domain.entities.Usuario;
 
 /**
@@ -14,4 +16,10 @@ public interface UsuarioRepositoryPort {
      * @return usuario
      */
     Usuario save(Usuario usuario);
+    /**
+     * Método que permite buscar un usuario por su correo electrónico.
+     * @param dni
+     * @return usuario
+     */
+    Optional<Usuario> findByDni(String dni);
 }

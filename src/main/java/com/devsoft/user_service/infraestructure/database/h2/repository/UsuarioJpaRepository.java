@@ -16,4 +16,11 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity
  */
 public interface UsuarioJpaRepository
         extends JpaRepository<UsuarioEntity, Long> {
+        /**
+         * Método que permite buscar un usuario por su DNI.
+         *
+         * @param dni el DNI del usuario a buscar
+         * @return la entidad de dominio UsuarioEntity
+         */
+        UsuarioEntity findByDni(String dni);
 }

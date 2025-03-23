@@ -60,4 +60,9 @@ public class UsuarioEntity {
         this.password = passwordParam;
         this.rol = rolParam;
     }
+    /**
+     * Constructor vacío.
+     */
+    public UsuarioEntity() {
+    }
 }

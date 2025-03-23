@@ -1,5 +1,7 @@
 package com.devsoft.user_service.infraestructure.database.h2.adapter;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Component;
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
@@ -36,4 +38,16 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
                         .save(usuarioEntity));
         return saveUser;
     }
+
+    /**
+     * Busca un usuario por su DNI.
+     *
+     * @param dni el DNI del usuario a buscar
+     * @return la entidad de dominio Usuario
+     */
+    @Override
+    public Optional<Usuario> findByDni(final String dni) {
+        return Optional.ofNullable(usuarioJpaRepository.findByDni(dni))
+                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity));
+}
 }
