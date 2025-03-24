@@ -12,7 +12,7 @@ public final class Usuario {
     /**
      * Identificador único del usuario.
      */
-    private String dni;
+    private final String dni;
     /**
      * Nombre del usuario.
      */
@@ -40,8 +40,8 @@ public final class Usuario {
      * @param roleParam     Rol del usuario.
      */
     public Usuario(final String dniParam, final String nombreParam,
-                   final String emailParam, final String passwordParam,
-                   final String roleParam) {
+            final String emailParam, final String passwordParam,
+            final String roleParam) {
         this.dni = dniParam;
         this.nombre = nombreParam;
         this.email = new Email(emailParam);
