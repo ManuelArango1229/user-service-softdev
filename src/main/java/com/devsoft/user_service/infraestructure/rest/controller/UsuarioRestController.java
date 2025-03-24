@@ -41,9 +41,9 @@ public class UsuarioRestController {
      *
      * @param usuarioDto el objeto de transferencia de datos del usuario que
      *                   contiene la información del usuario
-     * Registra un nuevo usuario en el sistema.
-     * @param usuarioDto DTO con los datos del usuario.
-     * @return ResponseEntity con estado 201 (CREATED) si el registro es exitoso, o 400 (BAD REQUEST) en caso de error.
+     *                   Registra un nuevo usuario en el sistema.
+     * @return ResponseEntity con estado 201 (CREATED) si el registro es exitoso, o
+     *         400 (BAD REQUEST) en caso de error.
      */
     @PostMapping("/registro")
     public ResponseEntity<?> registrarUsuario(@Valid @RequestBody final UsuarioRequestDto usuarioDto) {
@@ -61,8 +61,8 @@ public class UsuarioRestController {
      *
      * @param request Objeto que contiene los datos de inicio de sesión del usuario.
      * @return Objeto que contiene la respuesta de autenticación.
-          * @throws Exception si hay un error en la autenticación.
-          */
+     * @throws Exception si hay un error en la autenticación.
+     */
     @ResponseStatus(code = HttpStatus.OK)
     @PostMapping("/login")
     public AutenticacionResponseDto loginUsuario(@RequestBody final UsuarioLoginRequestDto request) throws Exception {

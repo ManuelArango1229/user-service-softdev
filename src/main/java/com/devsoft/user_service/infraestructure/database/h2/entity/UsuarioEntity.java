@@ -19,7 +19,6 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Esta clase representa la entidad de usuario en la base de datos.
@@ -28,7 +27,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioEntity implements UserDetails {
     /**

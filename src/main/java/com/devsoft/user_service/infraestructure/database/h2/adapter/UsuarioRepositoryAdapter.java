@@ -52,6 +52,8 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
         return Optional.ofNullable(usuarioJpaRepository.findByEmail(email))
                 .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity.get()));
     }
+
+    /**
      * Busca un usuario por su DNI.
      *
      * @param dni el DNI del usuario a buscar
@@ -61,5 +63,5 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     public Optional<Usuario> findByDni(final String dni) {
         return Optional.ofNullable(usuarioJpaRepository.findByDni(dni))
                 .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity));
-}
+    }
 }
