@@ -131,15 +131,6 @@ public final class Usuario {
     }
 
     /**
-     * Establece el DNI del usuario.
-     *
-     * @param dniParam Nuevo DNI del usuario.
-     */
-    public void setDni(final String dniParam) {
-        this.dni = dniParam;
-    }
-
-    /**
      * Establece el rol del usuario.
      *
      * @param roleParam Nuevo rol del usuario.
