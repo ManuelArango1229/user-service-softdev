@@ -2,6 +2,8 @@ package com.devsoft.user_service.use_cases;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.domain.services.PasswordEncoderPort;
@@ -39,6 +41,7 @@ import lombok.RequiredArgsConstructor;
  * }</pre>
  */
 @RequiredArgsConstructor
+@Component
 public class UsuarioUpdateInteractor {
     /**
      * REPOSITORIO DE USUARIOS.
