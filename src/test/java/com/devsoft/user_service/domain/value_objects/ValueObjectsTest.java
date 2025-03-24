@@ -3,9 +3,12 @@ package com.devsoft.user_service.domain.value_objects;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
+
 class ValueObjectsTest {
 
     @Test
+    @DisplayName("Debe lanzar una excepción de email incorrecto")
     void testEmailCreation() {
         Email email = new Email("test@example.com");
         assertEquals("test@example.com", email.getValue());
@@ -19,6 +22,7 @@ class ValueObjectsTest {
     }
 
     @Test
+    @DisplayName("Debe lanzar una excepción de contraseña incorrecta")
     void testPasswordCreation() {
         Password password = new Password("Hola123HA");
         assertEquals("Hola123HA", password.getValue());
@@ -39,6 +43,7 @@ class ValueObjectsTest {
     }
 
     @Test
+    @DisplayName("Debe lanzar una excepción de rol no válido")
     void testRoleFromString() {
         assertEquals(Role.CLIENTE, Role.fromString("CLIENTE"));
         assertEquals(Role.ADMINISTRADOR, Role.fromString("ADMINISTRADOR"));

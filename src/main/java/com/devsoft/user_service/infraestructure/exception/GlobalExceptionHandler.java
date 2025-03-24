@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Manejador de excepciones para errores de validación de campos.
+     *
      * @param ex Excepción lanzada.
      * @return ResponseEntity con los errores de validación.
      */
@@ -36,6 +37,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Manejador de excepciones para la excepción UsuarioExisteErrorException.
+     *
      * @param ex excepción lanzada
      * @return respuesta de error
      */
@@ -48,6 +50,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Manejador de excepciones para la excepción PasswordErrorException.
+     *
      * @param ex excepción lanzada
      * @return respuesta de error
      */
@@ -60,6 +63,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Manejador de excepciones para la excepción RolInvalidoErrorException.
+     *
      * @param ex excepción lanzada
      * @return respuesta de error
      */
