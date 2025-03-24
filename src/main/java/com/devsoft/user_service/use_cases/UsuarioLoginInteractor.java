@@ -1,9 +1,6 @@
 package com.devsoft.user_service.use_cases;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
@@ -17,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Clase encargada de manejar la autenticación de usuarios y la generación de tokens JWT.
  */
-@Component
+@Service
 @RequiredArgsConstructor
 public class UsuarioLoginInteractor {
 
@@ -36,17 +33,17 @@ public class UsuarioLoginInteractor {
     /**
      * Autentica a un usuario en el sistema y genera un token JWT para su sesión.
      *
-     * @param request los datos del usuario que intenta autenticarse.
-     * @return un {@link Map} con la información del usuario y el token JWT generado.
+     * @param email   el correo electronico del usuario.
+     * @param password la contraseña del usuario.
+     * @return el token JWT generado.
      * @throws Exception si hay un error en la autenticación.
      */
-    public Map<Usuario, String> login(final Usuario request) throws Exception {
+    public String login(final String email, final String password) throws Exception {
         // Autentica al usuario con el correo y la contraseña proporcionados
-        authenticationManager.authenticate(request.getEmail().getValue(), request.getPassword().getValue());
+        authenticationManager.authenticate(email, password);
 
         // Busca el usuario en el repositorio
-        Usuario usuario = usuarioRepository.findByEmail(request.getEmail().getValue())
-                                           .orElseThrow();
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow();
 
         // Obtiene detalles del usuario usando una abstracción en la capa de dominio
         String username = userDetailsService.getUsername(usuario);
@@ -54,9 +51,7 @@ public class UsuarioLoginInteractor {
         // Genera el token JWT con el username
         String token = jwtServicio.obtenerToken(username);
 
-        // Retorna la respuesta con los datos del usuario y el token generado
-        return new HashMap<Usuario, String>() {{
-            put(usuario, token);
-        }};
+        // Retorna la respuesta con el token generado
+        return token;
     }
 }

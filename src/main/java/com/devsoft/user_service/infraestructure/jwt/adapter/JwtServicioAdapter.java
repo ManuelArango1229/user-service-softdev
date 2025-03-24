@@ -1,10 +1,12 @@
-package com.devsoft.user_service.infraestructure.jwt;
+package com.devsoft.user_service.infraestructure.jwt.adapter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.devsoft.user_service.domain.services.JwtServicioPort;
 
@@ -22,7 +24,8 @@ import java.util.function.Function;
 public class JwtServicioAdapter implements JwtServicioPort {
 
     /** Clave secreta utilizada para la firma de los tokens JWT. */
-    private static final String SECRET = "secret";
+    @Value("${jwt.secret}")
+    private String secret;
 
     /** Tiempo de expiración del token en milisegundos (30 minutos). */
     private static final Long EXPIRATION = 1800000L;
@@ -63,7 +66,7 @@ public class JwtServicioAdapter implements JwtServicioPort {
      * @return la clave secreta en formato {@link SecretKey}.
      */
     private SecretKey obtenerLlave() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -77,7 +80,7 @@ public class JwtServicioAdapter implements JwtServicioPort {
     @Override
     public boolean validarToken(final String token, final String username) {
         final String tokenUsername = obtenerUsernameDesdeToken(token);
-        return (tokenUsername.equals(username) && !validarTokenVencido(token));
+        return tokenUsername.equals(username) && !validarTokenVencido(token);
     }
 
     /**

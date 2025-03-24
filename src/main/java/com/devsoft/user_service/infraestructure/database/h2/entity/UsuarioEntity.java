@@ -1,24 +1,35 @@
 package com.devsoft.user_service.infraestructure.database.h2.entity;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.devsoft.user_service.domain.value_objects.Role;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Esta clase representa la entidad de usuario en la base de datos.
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioEntity implements UserDetails {
     /**
      * Atributo que representa el identificador único del usuario.
@@ -37,6 +48,7 @@ public class UsuarioEntity implements UserDetails {
     /**
      * Atributo que representa el correo electrónico del usuario.
      */
+    @Column(nullable = false)
     private String email;
     /**
      * Atributo que representa la contraseña del usuario.
@@ -67,23 +79,33 @@ public class UsuarioEntity implements UserDetails {
     }
 
     /**
-     * Retorna la colección de permisos (autoridades) concedidos al usuario.
+     * Obtiene las autoridades del usuario.
      *
-     * @return una colección de objetos {@code GrantedAuthority} que representan
-     *         los roles o permisos del usuario. En este caso, devuelve {@code null}.
+     * @return Las autoridades del usuario.
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority((rol.name())));
     }
 
     /**
-     * Obtiene el nombre de usuario del usuario autenticado.
+     * Obtiene la contraseña del usuario.
      *
-     * @return el correo electrónico del usuario, que se utiliza como nombre de usuario.
+     * @return La contraseña del usuario.
+     */
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Obtiene el nombre de usuario del usuario, en este caso el correo electrónico.
+     *
+     * @return El nombre de usuario del usuario.
      */
     @Override
     public String getUsername() {
         return email;
     }
+
 }

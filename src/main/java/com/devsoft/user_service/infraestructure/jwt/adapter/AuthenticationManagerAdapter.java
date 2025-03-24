@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.jwt;
+package com.devsoft.user_service.infraestructure.jwt.adapter;
 
 import javax.naming.AuthenticationException;
 
@@ -8,25 +8,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import com.devsoft.user_service.domain.services.AuthenticationManagerPort;
 
+import lombok.RequiredArgsConstructor;
+
 
 /**
  * Adaptador que implementa la interfaz {@link AuthenticationManagerPort}
  * y delega la autenticación a un {@link AuthenticationManager} de Spring Security.
  */
 @Component
+@RequiredArgsConstructor
 public class AuthenticationManagerAdapter implements AuthenticationManagerPort {
 
-    /** El gestor de autenticación de Spring Security. */
+    /** El manejador de autenticación de Spring Security. */
     private final AuthenticationManager authenticationManager;
-
-    /**
-     * Constructor que inicializa el adaptador con un {@link AuthenticationManager}.
-     *
-     * @param authenticationManagerParam El gestor de autenticación de Spring Security.
-     */
-    public AuthenticationManagerAdapter(final AuthenticationManager authenticationManagerParam) {
-        this.authenticationManager = authenticationManagerParam;
-    }
 
     /**
      * Autentica a un usuario con las credenciales proporcionadas.

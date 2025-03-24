@@ -2,16 +2,34 @@ package com.devsoft.user_service.infraestructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.devsoft.user_service.infraestructure.jwt.JwtFiltroAutenticacion;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * Clase de configuración de seguridad.
  */
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    /**
+     * Proveedor de autenticación.
+     */
+    private final AuthenticationProvider authProvider;
+
+    /**
+     * Filtro de autenticación JWT.
+     */
+    private final JwtFiltroAutenticacion jwtAuthenticationFilter;
 
     /**
      * Método para configurar la seguridad de la aplicación.
@@ -32,7 +50,11 @@ public class SecurityConfig {
             )
             .headers((headers) -> headers
                 .frameOptions((frameOptions) -> frameOptions.disable()) // Permite frames
-            );
+            ).sessionManagement((sessionManagement) -> sessionManagement
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Desactiva la creación de sesiones
+            )
+            .authenticationProvider(authProvider) // Establece el proveedor de autenticación
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Agrega el filtro de autenticación JWT
         return http.build();
     }
 }

@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.jwt;
+package com.devsoft.user_service.infraestructure.jwt.adapter;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.services.UserDetailsPort;
 
-/**
- * Clase que implementa la interfaz UserDetailsPort.
- */
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class UserDetailsAdapter implements UserDetailsPort {
 
     /**
@@ -28,4 +28,5 @@ public class UserDetailsAdapter implements UserDetailsPort {
             .build();
         return userDetails.getUsername();
     }
+
 }
