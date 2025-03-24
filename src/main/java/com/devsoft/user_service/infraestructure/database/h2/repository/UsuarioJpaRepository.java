@@ -28,4 +28,11 @@ public interface UsuarioJpaRepository
         */
         Optional<UsuarioEntity> findByEmail(String email);
 
+        /**
+         * Método que permite buscar un usuario por su DNI.
+         *
+         * @param dni el DNI del usuario a buscar
+         * @return la entidad de dominio UsuarioEntity
+         */
+        UsuarioEntity findByDni(String dni);
 }

@@ -24,6 +24,9 @@ jobs:
       - name: 📦 Construir el proyecto con Maven
         run: mvn clean package -DskipTests
 
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
+
       - name: 🧪 Ejecutar pruebas
         run: mvn test
 

@@ -108,4 +108,9 @@ public class UsuarioEntity implements UserDetails {
         return email;
     }
 
+    /**
+     * Constructor vacío.
+     */
+    public UsuarioEntity() {
+    }
 }

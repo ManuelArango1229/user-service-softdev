@@ -24,4 +24,10 @@ public interface UsuarioRepositoryPort {
      * @return usuario
      */
     Optional<Usuario> findByEmail(String email);
+    /**
+     * Método que permite buscar un usuario por su correo electrónico.
+     * @param dni
+     * @return usuario
+     */
+    Optional<Usuario> findByDni(String dni);
 }

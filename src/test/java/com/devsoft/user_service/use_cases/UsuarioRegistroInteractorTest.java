@@ -8,6 +8,7 @@ import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.domain.services.PasswordEncoderPort;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,6 +29,7 @@ class UsuarioRegistroInteractorTest {
     }
 
     @Test
+    @DisplayName("Debe guardar un usuario correctamente")
     void testSaveUsuario() {
         Usuario usuario = new Usuario("123", "Juan", "juan@example.com", "Hola123HA", "ADMINISTRADOR");
         String encodedPassword = "encoded_Hola123HA";

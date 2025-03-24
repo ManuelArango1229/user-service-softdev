@@ -1,6 +1,8 @@
 package com.devsoft.user_service.infraestructure.rest.mapper;
 
 import com.devsoft.user_service.domain.entities.Usuario;
+import com.devsoft.user_service.domain.exceptions.RolInvalidoErrorException;
+import com.devsoft.user_service.domain.value_objects.Role;
 import com.devsoft.user_service.infraestructure.rest.dto.UsuarioRequestDto;
 
 /**
@@ -18,10 +20,18 @@ public class UsuarioDtoMapper {
      * @return el DTO que contiene la información del usuario
      */
     public static Usuario mapToEntity(final UsuarioRequestDto usuarioDto) {
-        return new Usuario(usuarioDto.getDni(),
+        Role role;
+        try {
+            role = Role.valueOf(usuarioDto.getRole().trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new RolInvalidoErrorException("Rol no válido: " + usuarioDto.getRole() + ". Debe ser ADMINISTRADOR, CLIENTE o REPARTIDOR.");
+        }
+        return new Usuario(
+                usuarioDto.getDni(),
                 usuarioDto.getName(),
                 usuarioDto.getEmail(),
                 usuarioDto.getPassword(),
-                usuarioDto.getRole());
+                role.name()
+        );
     }
 }
