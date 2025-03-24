@@ -1,58 +1,72 @@
 package com.devsoft.user_service.infraestructure.exception;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.devsoft.user_service.domain.exceptions.PasswordErrorException;
 import com.devsoft.user_service.domain.exceptions.RolInvalidoErrorException;
 import com.devsoft.user_service.domain.exceptions.UsuarioExisteErrorException;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Manejador global de excepciones para la aplicación.
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     /**
-     * Manejador de excepciones para la excepción RolInvalidoErrorException.
-     * @param e excepción lanzada
-     * @return respuesta de error
+     * Manejador de excepciones para errores de validación de campos.
+     * @param ex Excepción lanzada.
+     * @return ResponseEntity con los errores de validación.
      */
-    @ExceptionHandler(RolInvalidoErrorException.class)
-    public ResponseEntity<Map<String, String>> handleRolInvalido(final RolInvalidoErrorException e) {
-        return buildErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(final MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.put(error.getField(), error.getDefaultMessage());
+        }
+
+        return ResponseEntity.badRequest().body(errors);
     }
-    /**
-     * Manejador de excepciones para la excepción PasswordErrorException.
-     * @param e excepción lanzada
-     * @return respuesta de error
-     */
-    @ExceptionHandler(PasswordErrorException.class)
-    public ResponseEntity<Map<String, String>> handlePasswordError(final PasswordErrorException e) {
-        return buildErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
+
     /**
      * Manejador de excepciones para la excepción UsuarioExisteErrorException.
-     * @param e excepción lanzada
+     * @param ex excepción lanzada
      * @return respuesta de error
      */
     @ExceptionHandler(UsuarioExisteErrorException.class)
-    public ResponseEntity<Map<String, String>> handleUsuarioExiste(final UsuarioExisteErrorException e) {
-        return buildErrorResponse(e.getMessage(), HttpStatus.CONFLICT);
+    public ResponseEntity<Map<String, String>> handleUsuarioExiste(final UsuarioExisteErrorException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
+
     /**
-     * Construye una respuesta de error.
-     * @param message mensaje de error
-     * @param status estado de la respuesta
+     * Manejador de excepciones para la excepción PasswordErrorException.
+     * @param ex excepción lanzada
      * @return respuesta de error
      */
-    private ResponseEntity<Map<String, String>> buildErrorResponse(final String message, final  HttpStatus status) {
+    @ExceptionHandler(PasswordErrorException.class)
+    public ResponseEntity<Map<String, String>> handlePasswordError(final PasswordErrorException ex) {
         Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("error", message);
-        return new ResponseEntity<>(errorResponse, status);
+        errorResponse.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    /**
+     * Manejador de excepciones para la excepción RolInvalidoErrorException.
+     * @param ex excepción lanzada
+     * @return respuesta de error
+     */
+    @ExceptionHandler(RolInvalidoErrorException.class)
+    public ResponseEntity<Map<String, String>> handleRolInvalido(final RolInvalidoErrorException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 }
