@@ -8,7 +8,6 @@ import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
 import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
 import com.devsoft.user_service.infraestructure.database.h2.repository.UsuarioJpaRepository;
-import com.devsoft.user_service.use_cases.exceptions.UsuarioNoEncontradoException;
 
 import lombok.RequiredArgsConstructor;
 
