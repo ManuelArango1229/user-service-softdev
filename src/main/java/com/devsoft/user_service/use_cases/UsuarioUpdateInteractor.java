@@ -64,7 +64,7 @@ public class UsuarioUpdateInteractor {
      */
     public Usuario execute(final String userId, final UsuarioUpdateDto updatedData) {
         Usuario user = usuarioRepository.findByDni(userId)
-                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado: " + userId));
         if (updatedData.getEmail() != null) {
             user.setEmail(new Email(updatedData.getEmail()));
         }

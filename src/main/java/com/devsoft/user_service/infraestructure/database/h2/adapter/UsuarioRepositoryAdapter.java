@@ -65,9 +65,6 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     @Override
     public Optional<Usuario> findByDni(final String dni) {
         return Optional.ofNullable(usuarioJpaRepository.findByDni(dni))
-                .map(UsuarioEntityMapper::toUsuario)
-                .or(() -> {
-                    throw new UsuarioNoEncontradoException("El usuario con DNI " + dni + " no se encuentra");
-                });
+                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity));
     }
 }
