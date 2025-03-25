@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DemoApplicationTest {
 
     @Test
@@ -18,6 +18,6 @@ class DemoApplicationTest {
     @Test
     @DisplayName("Debe ejecutar el método main sin lanzar excepciones")
     void mainMethodRuns() {
-        assertDoesNotThrow(() -> DemoApplication.main(new String[]{}));
+        assertDoesNotThrow(() -> DemoApplication.main(new String[] {}));
     }
 }
