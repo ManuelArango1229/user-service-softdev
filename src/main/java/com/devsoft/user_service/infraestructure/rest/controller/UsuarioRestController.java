@@ -104,7 +104,7 @@ public class UsuarioRestController {
      * @param usuarioUpdateDto Datos a actualizar del usuario.
      * @return Respuesta de éxito.
      */
-    @PutMapping("/usuarios/{id}")
+    @PutMapping("/{id}")
     @PreAuthorize("#id == authentication.principal.username")
     public ResponseEntity<String> actualizarUsuario(@PathVariable final String id,
             @RequestBody final UsuarioUpdateDto usuarioUpdateDto) {

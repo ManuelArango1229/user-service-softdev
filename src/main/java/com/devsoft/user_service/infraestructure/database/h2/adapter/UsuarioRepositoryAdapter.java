@@ -31,11 +31,12 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
      */
     @Override
     public Usuario save(final Usuario usuario) {
-        UsuarioEntity usuarioEntity = UsuarioEntityMapper
-                .toUsuarioEntity(usuario);
-        Usuario saveUser = UsuarioEntityMapper.toUsuario(
-                usuarioJpaRepository
-                        .save(usuarioEntity));
+        UsuarioEntity usuarioEntity = UsuarioEntityMapper.toUsuarioEntity(usuario);
+        UsuarioEntity updateUser = usuarioJpaRepository.findByDni(usuario.getDni());
+        if (updateUser != null) {
+            usuarioEntity.setId(updateUser.getId());
+        }
+        Usuario saveUser = UsuarioEntityMapper.toUsuario(usuarioJpaRepository.save(usuarioEntity));
         return saveUser;
     }
 
