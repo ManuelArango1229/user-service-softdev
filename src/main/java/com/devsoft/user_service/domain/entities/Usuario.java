@@ -138,4 +138,19 @@ public final class Usuario {
     public void setRole(final Role roleParam) {
         this.role = roleParam;
     }
+
+    /**
+     * Método que permite obtener el usuario en formato de cadena.
+     *
+     * @return usuario
+     */
+    public String toString() {
+        return "Usuario{"
+                + "dni='" + dni + '\''
+                + ", nombre='" + nombre + '\''
+                + ", email=" + email.getValue()
+                + ", password=" + password.getValue()
+                + ", role=" + role.name()
+                + '}';
+    }
 }

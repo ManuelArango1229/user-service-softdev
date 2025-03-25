@@ -1,7 +1,5 @@
 package com.devsoft.user_service.use_cases;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Component;
 
 import com.devsoft.user_service.domain.entities.Usuario;
@@ -46,11 +44,11 @@ public class UsuarioUpdateInteractor {
     /**
      * REPOSITORIO DE USUARIOS.
      */
-    private UsuarioRepositoryPort usuarioRepository;
+    private final UsuarioRepositoryPort usuarioRepository;
     /**
      * PASSWORD ENCODER.
      */
-    private PasswordEncoderPort passwordEncoder;
+    private final PasswordEncoderPort passwordEncoder;
 
     /**
      * Actualiza los detalles de un usuario existente.
@@ -66,10 +64,6 @@ public class UsuarioUpdateInteractor {
         Usuario user = usuarioRepository.findByDni(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         if (updatedData.getEmail() != null) {
-            Optional<Usuario> existingUser = usuarioRepository.findByEmail(updatedData.getEmail());
-            if (existingUser.isPresent() && !existingUser.get().getDni().equals(userId)) {
-                throw new RuntimeException("El email ya está en uso");
-            }
             user.setEmail(new Email(updatedData.getEmail()));
         }
 
@@ -80,6 +74,7 @@ public class UsuarioUpdateInteractor {
         if (updatedData.getNombre() != null) {
             user.setNombre(updatedData.getNombre());
         }
+
         return usuarioRepository.save(user);
     }
 }
