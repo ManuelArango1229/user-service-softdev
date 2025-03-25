@@ -65,7 +65,7 @@ public class JwtServicioAdapter implements JwtServicioPort {
      *
      * @return la clave secreta en formato {@link SecretKey}.
      */
-    private SecretKey obtenerLlave() {
+    public SecretKey obtenerLlave() {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
@@ -98,7 +98,7 @@ public class JwtServicioAdapter implements JwtServicioPort {
      * Verifica si un token JWT ha expirado.
      *
      * @param token el token JWT a validar.
-     * @return {@code true} si el token ha expirado, {@code false} en caso contrario.
+     * @return {@code true} si el token no ha expirado, {@code false} en caso contrario.
      */
     @Override
     public boolean validarTokenVencido(final String token) {
