@@ -34,4 +34,12 @@ public class PasswordEncoderAdapter implements PasswordEncoderPort {
     public boolean matches(final String password, final String encodedPassword) {
         return encoder.matches(password, encodedPassword);
     }
+
+    /**
+     * Método que devuelve la instancia de BCryptPasswordEncoder.
+     * @return instancia de BCryptPasswordEncoder
+     */
+    public BCryptPasswordEncoder getEncoder() {
+        return encoder;
+    }
 }

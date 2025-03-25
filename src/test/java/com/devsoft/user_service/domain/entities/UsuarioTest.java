@@ -1,8 +1,6 @@
 package com.devsoft.user_service.domain.entities;
 
 import com.devsoft.user_service.domain.value_objects.Email;
-import com.devsoft.user_service.domain.value_objects.Password;
-import com.devsoft.user_service.domain.value_objects.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,15 +24,7 @@ class UsuarioTest {
                 () -> assertEquals("john.doe@example.com", usuario.getEmail().getValue(),
                         "El email debería ser john.doe@example.com"),
                 () -> assertEquals("Hola123HA", usuario.getPassword().getValue(), "La contraseña no coincide"),
-                () -> assertEquals("ADMINISTRADOR", usuario.getRole().name(), "El rol no es el esperado")
-        );
-    }
-
-    @Test
-    @DisplayName("Debe actualizar el DNI correctamente")
-    void testSetDni() {
-        usuario.setDni("98765432");
-        assertEquals("98765432", usuario.getDni(), "El DNI no se actualizó correctamente");
+                () -> assertEquals("ADMINISTRADOR", usuario.getRole().name(), "El rol no es el esperado"));
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.exceptions.RolInvalidoErrorException;
 import com.devsoft.user_service.domain.value_objects.Role;
 import com.devsoft.user_service.infraestructure.rest.dto.UsuarioRequestDto;
-import com.devsoft.user_service.infraestructure.rest.dto.UsuarioResponseDto;
 
 /**
  * UsuarioDtoMapper es una clase de utilidad que proporciona métodos para
@@ -13,18 +12,6 @@ import com.devsoft.user_service.infraestructure.rest.dto.UsuarioResponseDto;
  * relacionados con usuarios.
  */
 public class UsuarioDtoMapper {
-    /**
-     * Convierte un UsuarioRequestDto a una entidad Usuario.
-     *
-     * @param usuario el DTO que contiene la información del usuario
-     * @return la entidad Usuario
-     */
-    public static UsuarioResponseDto mapToDto(final Usuario usuario) {
-        return new UsuarioResponseDto(usuario.getDni(),
-                usuario.getNombre(),
-                usuario.getEmail().getValue(),
-                usuario.getRole().name());
-    }
 
     /**
      * Convierte una entidad Usuario a un UsuarioResponseDto.

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.devsoft.user_service.domain.exceptions.PasswordErrorException;
 import com.devsoft.user_service.domain.exceptions.RolInvalidoErrorException;
 import com.devsoft.user_service.domain.exceptions.UsuarioExisteErrorException;
+import com.devsoft.user_service.use_cases.exceptions.UsuarioNoEncontradoException;
 
 /**
  * Manejador global de excepciones para la aplicación.
@@ -72,5 +73,16 @@ public class GlobalExceptionHandler {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    /**
+     * @param ex
+     * @return response con el error
+     */
+    @ExceptionHandler(UsuarioNoEncontradoException.class)
+    public ResponseEntity<Map<String, String>> handleUsuarioNoExiste(final UsuarioNoEncontradoException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 }

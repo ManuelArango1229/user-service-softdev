@@ -12,7 +12,7 @@ public final class Usuario {
     /**
      * Identificador único del usuario.
      */
-    private String dni;
+    private final String dni;
     /**
      * Nombre del usuario.
      */
@@ -40,8 +40,8 @@ public final class Usuario {
      * @param roleParam     Rol del usuario.
      */
     public Usuario(final String dniParam, final String nombreParam,
-                   final String emailParam, final String passwordParam,
-                   final String roleParam) {
+            final String emailParam, final String passwordParam,
+            final String roleParam) {
         this.dni = dniParam;
         this.nombre = nombreParam;
         this.email = new Email(emailParam);
@@ -131,20 +131,26 @@ public final class Usuario {
     }
 
     /**
-     * Establece el DNI del usuario.
-     *
-     * @param dniParam Nuevo DNI del usuario.
-     */
-    public void setDni(final String dniParam) {
-        this.dni = dniParam;
-    }
-
-    /**
      * Establece el rol del usuario.
      *
      * @param roleParam Nuevo rol del usuario.
      */
     public void setRole(final Role roleParam) {
         this.role = roleParam;
+    }
+
+    /**
+     * Método que permite obtener el usuario en formato de cadena.
+     *
+     * @return usuario
+     */
+    public String toString() {
+        return "Usuario{"
+                + "dni='" + dni + '\''
+                + ", nombre='" + nombre + '\''
+                + ", email=" + email.getValue()
+                + ", password=" + password.getValue()
+                + ", role=" + role.name()
+                + '}';
     }
 }

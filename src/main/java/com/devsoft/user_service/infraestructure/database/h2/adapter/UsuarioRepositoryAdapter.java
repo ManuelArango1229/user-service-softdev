@@ -8,6 +8,7 @@ import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
 import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
 import com.devsoft.user_service.infraestructure.database.h2.repository.UsuarioJpaRepository;
+
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -31,12 +32,27 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
      */
     @Override
     public Usuario save(final Usuario usuario) {
-        UsuarioEntity usuarioEntity = UsuarioEntityMapper
-                .toUsuarioEntity(usuario);
-        Usuario saveUser = UsuarioEntityMapper.toUsuario(
-                usuarioJpaRepository
-                        .save(usuarioEntity));
+        UsuarioEntity usuarioEntity = UsuarioEntityMapper.toUsuarioEntity(usuario);
+        UsuarioEntity updateUser = usuarioJpaRepository.findByDni(usuario.getDni());
+        if (updateUser != null) {
+            usuarioEntity.setId(updateUser.getId());
+        }
+        Usuario saveUser = UsuarioEntityMapper.toUsuario(usuarioJpaRepository.save(usuarioEntity));
         return saveUser;
+    }
+
+    /**
+     * Busca un usuario por su dirección de correo electrónico y lo convierte
+     * en un objeto de dominio {@code Usuario}.
+     *
+     * @param email la dirección de correo electrónico del usuario a buscar.
+     * @return un {@code Optional<Usuario>} que contiene el usuario si existe en
+     *         la base de datos, o un {@code Optional.empty()} si no se encuentra.
+     */
+    @Override
+    public Optional<Usuario> findByEmail(final String email) {
+        return Optional.ofNullable(usuarioJpaRepository.findByEmail(email))
+                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity.get()));
     }
 
     /**
@@ -49,5 +65,5 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     public Optional<Usuario> findByDni(final String dni) {
         return Optional.ofNullable(usuarioJpaRepository.findByDni(dni))
                 .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity));
-}
+    }
 }

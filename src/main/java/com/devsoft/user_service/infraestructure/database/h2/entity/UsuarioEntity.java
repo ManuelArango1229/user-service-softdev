@@ -1,20 +1,32 @@
 package com.devsoft.user_service.infraestructure.database.h2.entity;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.devsoft.user_service.domain.value_objects.Role;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * Esta clase representa la entidad de usuario en la base de datos.
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data
-public class UsuarioEntity {
+@Builder
+public class UsuarioEntity implements UserDetails {
     /**
      * Atributo que representa el identificador único del usuario.
      */
@@ -32,6 +44,7 @@ public class UsuarioEntity {
     /**
      * Atributo que representa el correo electrónico del usuario.
      */
+    @Column(nullable = false)
     private String email;
     /**
      * Atributo que representa la contraseña del usuario.
@@ -60,6 +73,59 @@ public class UsuarioEntity {
         this.password = passwordParam;
         this.rol = rolParam;
     }
+
+    /**
+     * @param idParam
+     * @param dniParam
+     * @param nombreParam
+     * @param emailParam
+     * @param passwordParam
+     * @param rolParam
+     */
+    public UsuarioEntity(final Long idParam,
+            final String dniParam,
+            final String nombreParam,
+            final String emailParam,
+            final String passwordParam,
+            final Role rolParam) {
+        this.id = idParam;
+        this.dni = dniParam;
+        this.nombre = nombreParam;
+        this.email = emailParam;
+        this.password = passwordParam;
+        this.rol = rolParam;
+    }
+
+    /**
+     * Obtiene las autoridades del usuario.
+     *
+     * @return Las autoridades del usuario.
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority((rol.name())));
+    }
+
+    /**
+     * Obtiene la contraseña del usuario.
+     *
+     * @return La contraseña del usuario.
+     */
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Obtiene el nombre de usuario del usuario, en este caso el correo electrónico.
+     *
+     * @return El nombre de usuario del usuario.
+     */
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
     /**
      * Constructor vacío.
      */
