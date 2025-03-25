@@ -7,6 +7,7 @@ import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.domain.services.PasswordEncoderPort;
 import com.devsoft.user_service.domain.value_objects.Email;
 import com.devsoft.user_service.use_cases.dtos.UsuarioUpdateDto;
+import com.devsoft.user_service.use_cases.exceptions.UsuarioNoEncontradoException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -57,12 +58,13 @@ public class UsuarioUpdateInteractor {
      * @param updatedData Los nuevos datos del usuario encapsulados en un
      *                    {@link UsuarioUpdateDto}.
      * @return El usuario actualizado.
-     * @throws RuntimeException Si el usuario no es encontrado o si el email ya está
-     *                          en uso.
+     * @throws UsuarioNoEncontradoException Si el usuario no es encontrado o si el
+     *                                      email ya está
+     *                                      en uso.
      */
     public Usuario execute(final String userId, final UsuarioUpdateDto updatedData) {
         Usuario user = usuarioRepository.findByDni(userId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
         if (updatedData.getEmail() != null) {
             user.setEmail(new Email(updatedData.getEmail()));
         }

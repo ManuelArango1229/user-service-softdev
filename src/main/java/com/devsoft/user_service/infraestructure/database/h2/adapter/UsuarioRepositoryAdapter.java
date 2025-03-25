@@ -8,6 +8,8 @@ import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
 import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
 import com.devsoft.user_service.infraestructure.database.h2.repository.UsuarioJpaRepository;
+import com.devsoft.user_service.use_cases.exceptions.UsuarioNoEncontradoException;
+
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -63,6 +65,9 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     @Override
     public Optional<Usuario> findByDni(final String dni) {
         return Optional.ofNullable(usuarioJpaRepository.findByDni(dni))
-                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity));
+                .map(UsuarioEntityMapper::toUsuario)
+                .or(() -> {
+                    throw new UsuarioNoEncontradoException("El usuario con DNI " + dni + " no se encuentra");
+                });
     }
 }
