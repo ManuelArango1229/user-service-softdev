@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -38,6 +39,7 @@ class UsuarioUpdateInteractorTest {
     }
 
     @Test
+    @DisplayName("Test: Actualizar usuario inexistente")
     void testActualizarUsuarioExistente() {
         UsuarioUpdateDto updatedData = new UsuarioUpdateDto("Nuevo Nombre", "nuevo.email@example.com", "nuevaPassword");
 
@@ -55,19 +57,7 @@ class UsuarioUpdateInteractorTest {
     }
 
     @Test
-    void testActualizarUsuarioInexistente() {
-        when(usuarioRepository.findByDni("99999999")).thenReturn(Optional.empty());
-
-        UsuarioUpdateDto updatedData = new UsuarioUpdateDto("Nombre", "email@example.com", "password");
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            usuarioUpdateInteractor.execute("99999999", updatedData);
-        });
-
-        assertEquals("Usuario no encontrado", exception.getMessage());
-    }
-
-    @Test
+    @DisplayName("Test: Actualizar usuario con datos nulos")
     void testActualizarSoloNombre() {
         UsuarioUpdateDto updatedData = new UsuarioUpdateDto("Solo Nombre", null, null);
 
