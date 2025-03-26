@@ -50,6 +50,25 @@ public class UsuarioRegistroInteractor {
      * @return Usuario usuario registrado
      */
     public Usuario execute(final UsuarioRegisterDto usuario) {
+        // Validación de campos obligatorios
+        if (usuario == null) {
+            throw new IllegalArgumentException("El usuario no puede ser null.");
+        }
+        if (usuario.getDni() == null || usuario.getDni().isEmpty()) {
+            throw new IllegalArgumentException("El DNI no puede ser null o vacío.");
+        }
+        if (usuario.getNombre() == null || usuario.getNombre().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede ser null o vacío.");
+        }
+        if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("El email no puede ser null o vacío.");
+        }
+        if (usuario.getPassword() == null || usuario.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("La contraseña no puede ser null o vacía.");
+        }
+        if (usuario.getRole() == null || usuario.getRole().isEmpty()) {
+            throw new IllegalArgumentException("El rol no puede ser null o vacío.");
+        }
         Usuario user;
         System.out.println("Usuario: " + usuario.getRole());
         switch (usuario.getRole()) {
@@ -74,22 +93,23 @@ public class UsuarioRegistroInteractor {
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         switch (usuario.getRole()) {
             case "CLIENTE":
-                Cliente nuevoUsuario = new Cliente(usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
-                        usuario.getPassword(), usuario.getEdad(),
-                        usuario.getAddress(), usuario.getGenero(), usuario.getPhoneNumber());
-                return clienteRepository.save(nuevoUsuario);
+                return clienteRepository.save(new Cliente(
+                    usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
+                    usuario.getPassword(), usuario.getEdad(),
+                    usuario.getAddress(), usuario.getGenero(), usuario.getPhoneNumber()));
             case "ADMINISTRADOR":
-                Administrador nuevoUsuario2 = new Administrador(usuario.getDni(), usuario.getNombre(),
-                        usuario.getEmail(),
-                        usuario.getPassword());
-                return administradorRepository.save(nuevoUsuario2);
+                return administradorRepository.save(new Administrador(
+                    usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
+                    usuario.getPassword()));
             case "REPARTIDOR":
-                Repartidor nuevoUsuario3 = new Repartidor(usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
-                        usuario.getPassword(), usuario.getVehiculoAsignado());
-                return repartidorRepository.save(nuevoUsuario3);
+                if (usuario.getVehiculoAsignado() == null) {
+                    throw new IllegalArgumentException("El vehículo asignado no puede ser null para un repartidor.");
+                }
+                return repartidorRepository.save(new Repartidor(
+                    usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
+                    usuario.getPassword(), usuario.getVehiculoAsignado()));
             default:
                 throw new RolInvalidoErrorException("Rol no válido: " + usuario.getRole());
         }
-
     }
 }
