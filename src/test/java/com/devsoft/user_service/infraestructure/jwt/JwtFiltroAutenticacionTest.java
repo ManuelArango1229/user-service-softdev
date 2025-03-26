@@ -1,5 +1,6 @@
 package com.devsoft.user_service.infraestructure.jwt;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -74,6 +75,23 @@ class JwtFiltroAutenticacionTest {
         jwtFiltroAutenticacion.doFilterInternal(request, response, filterChain);
 
         assertNull(SecurityContextHolder.getContext().getAuthentication());
+        verify(filterChain).doFilter(request, response);
+    }
+
+    @Test
+    @DisplayName("Debe ignorar la autenticación si el usuario ya está autenticado en el contexto")
+    void testUsuarioYaAutenticado() throws ServletException, IOException {
+        when(request.getHeader("Authorization")).thenReturn(TOKEN_PREFIX + TOKEN_VALIDO);
+        when(jwtServicio.obtenerUsernameDesdeToken(TOKEN_VALIDO)).thenReturn("testUser");
+
+        // Simula que ya hay un usuario autenticado
+        SecurityContextHolder.getContext().setAuthentication(mock(org.springframework.security.core.Authentication.class));
+
+        jwtFiltroAutenticacion.doFilterInternal(request, response, filterChain);
+
+        // No se debe hacer autenticación nuevamente
+        verify(userDetailsService, never()).loadUserByUsername(anyString());
+        verify(jwtServicio, never()).validarToken(anyString(), anyString());
         verify(filterChain).doFilter(request, response);
     }
 }
