@@ -11,7 +11,7 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.especializaci
  */
 public class AdministradorEntityMapper {
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
+     * Convierte una entidad de dominio Administrador a una entidad de base de datos
      * AdministradorEntity.
      *
      * @param usuario la entidad de dominio que contiene la
@@ -26,8 +26,8 @@ public class AdministradorEntityMapper {
     }
 
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
-     * AdministradorEntity.
+     * Convierte una entidad de la base de datos AdministradorEntity a una entidad
+     * del dominio Administrador.
      *
      * @param usuarioEntity usuario la entidad de dominio que contiene la
      *                      información del usuario

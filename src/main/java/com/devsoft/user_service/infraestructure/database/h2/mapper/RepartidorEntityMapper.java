@@ -7,11 +7,11 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.especializaci
  * RepartidorEntityMapper es una clase de utilidad que proporciona métodos para
  * convertir
  * entre entidades de dominio y entidades de base de datos relacionadas con
- * usuarios.
+ * repartidores.
  */
 public class RepartidorEntityMapper {
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
+     * Convierte una entidad de dominio Repartidor a una entidad de base de datos
      * RepartidorEntity.
      *
      * @param usuario la entidad de dominio que contiene la
@@ -27,8 +27,8 @@ public class RepartidorEntityMapper {
     }
 
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
-     * RepartidorEntity.
+     * Convierte una entidad de base de datos RepartidorEntity a una entidad del
+     * dominio Repartidor.
      *
      * @param usuarioEntity usuario la entidad de dominio que contiene la
      *                      información del usuario

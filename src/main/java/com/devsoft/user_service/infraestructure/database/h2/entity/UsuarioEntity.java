@@ -108,4 +108,12 @@ public class UsuarioEntity implements UserDetails {
      */
     public UsuarioEntity() {
     }
+
+    /**
+     * Retorna el rol del usuario.
+     * @return el rol del usuario.
+     */
+    public Role getRol() {
+        return this.rol;
+    }
 }
