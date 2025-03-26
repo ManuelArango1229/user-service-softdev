@@ -43,7 +43,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/auth/**").permitAll()
+                        .requestMatchers("/h2-console/**", "/auth/**", "/doc/**").permitAll()
                         .requestMatchers("/usuario/**").hasRole("ADMINISTRADOR")
                         .anyRequest().authenticated()
                 )
