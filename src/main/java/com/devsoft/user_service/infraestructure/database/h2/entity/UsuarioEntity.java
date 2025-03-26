@@ -11,9 +11,8 @@ import com.devsoft.user_service.domain.value_objects.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Builder;
@@ -24,18 +23,14 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@PrimaryKeyJoinColumn(name = "dni")
 @Data
 @Builder
 public class UsuarioEntity implements UserDetails {
     /**
-     * Atributo que representa el identificador único del usuario.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    /**
      * Atributo que representa el DNI del usuario.
      */
+    @Id
     private String dni;
     /**
      * Atributo que representa el nombre del usuario.
@@ -67,28 +62,6 @@ public class UsuarioEntity implements UserDetails {
             final String emailParam,
             final String passwordParam,
             final Role rolParam) {
-        this.dni = dniParam;
-        this.nombre = nombreParam;
-        this.email = emailParam;
-        this.password = passwordParam;
-        this.rol = rolParam;
-    }
-
-    /**
-     * @param idParam
-     * @param dniParam
-     * @param nombreParam
-     * @param emailParam
-     * @param passwordParam
-     * @param rolParam
-     */
-    public UsuarioEntity(final Long idParam,
-            final String dniParam,
-            final String nombreParam,
-            final String emailParam,
-            final String passwordParam,
-            final Role rolParam) {
-        this.id = idParam;
         this.dni = dniParam;
         this.nombre = nombreParam;
         this.email = emailParam;
