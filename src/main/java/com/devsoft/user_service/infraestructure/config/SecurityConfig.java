@@ -44,6 +44,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "/auth/**").permitAll() // Permitir acceso público
+                        .requestMatchers("/usuario/**").hasRole("ADMINISTRADOR") 
                         .anyRequest().authenticated() // Requerir autenticación en otras rutas
                 )
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**").disable()) // Deshabilitar CSRF solo para

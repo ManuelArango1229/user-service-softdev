@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  *
  */
 @RequiredArgsConstructor
-@RequestMapping("usuario")
+@RequestMapping("/usuario")
 @RestController
 public class UsuarioUpdateRestController {
     /**
@@ -49,7 +49,7 @@ public class UsuarioUpdateRestController {
      * @param usuarioUpdateDto Datos a actualizar del usuario.
      * @return Respuesta de éxito.
      */
-    @PutMapping("/{id}")
+    @PutMapping("/actualizar/{id}")
     public ResponseEntity<String> actualizarUsuario(@PathVariable final String id,
             @RequestBody final UsuarioUpdateDto usuarioUpdateDto) {
         usuarioUpdateInteractor.execute(id, usuarioUpdateDto);

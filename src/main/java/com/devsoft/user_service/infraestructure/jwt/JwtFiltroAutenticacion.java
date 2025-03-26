@@ -1,9 +1,11 @@
 package com.devsoft.user_service.infraestructure.jwt;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,6 +39,7 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
     /** Prefijo estándar para los tokens JWT en los encabezados de autorización. */
     private static final String TOKEN_PREFIX = "Bearer ";
 
+
     /**
      * Filtra cada solicitud HTTP para verificar la presencia y validez de un token JWT.
      * Si el token es válido, autentica al usuario en el contexto de seguridad.
@@ -61,6 +64,10 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
         }
 
         username = jwtServicio.obtenerUsernameDesdeToken(token);
+        String rol = jwtServicio.obtenerClaim(token, claims -> (String) claims.get("rol"));
+
+        System.out.println("Rol desde filtro de autenticación jwt: " + rol);
+
 
         if (username != null
             && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -71,7 +78,9 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
 
                 UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
+                        userDetails, null, Collections.singleton(
+                            new SimpleGrantedAuthority("ROLE_" + rol)
+                        )
                 );
 
                 authToken.setDetails(new WebAuthenticationDetailsSource()
