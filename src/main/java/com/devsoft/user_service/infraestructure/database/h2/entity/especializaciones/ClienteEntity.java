@@ -40,23 +40,23 @@ public class ClienteEntity extends UsuarioEntity {
     /**
      * Constructor para crear una nueva instancia de ClienteEntity.
      *
-     * @param dni       DNI del cliente que sirve como identificador único
-     * @param nombre    Nombre completo del cliente
-     * @param email     Correo electrónico del cliente
-     * @param password  Contraseña del cliente
-     * @param edad      Edad del cliente
-     * @param direccion Dirección de residencia del cliente
-     * @param genero    Género del cliente
-     * @param telefono  Número de teléfono del cliente
+     * @param dni            DNI del cliente que sirve como identificador único
+     * @param nombre         Nombre completo del cliente
+     * @param email          Correo electrónico del cliente
+     * @param password       Contraseña del cliente
+     * @param edadParam      Edad del cliente
+     * @param direccionParam Dirección de residencia del cliente
+     * @param generoParam    Género del cliente
+     * @param telefonoParam  Número de teléfono del cliente
      */
 
     public ClienteEntity(final String dni, final String nombre, final String email, final String password,
-            final int edad, final String direccion,
-            final String genero, final String telefono) {
+            final int edadParam, final String direccionParam,
+            final String generoParam, final String telefonoParam) {
         super(dni, nombre, email, password, Role.CLIENTE);
-        this.edad = edad;
-        this.direccion = direccion;
-        this.genero = genero;
-        this.telefono = telefono;
+        this.edad = edadParam;
+        this.direccion = direccionParam;
+        this.genero = generoParam;
+        this.telefono = telefonoParam;
     }
 }

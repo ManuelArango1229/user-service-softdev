@@ -28,7 +28,7 @@ public class AdministradorEntity extends UsuarioEntity {
      * @param password La contraseña del cliente (debe estar encriptada antes de
      *                 llegar aquí)
      */
-    public AdministradorEntity(String dni, String nombre, String email, String password) {
+    public AdministradorEntity(final String dni, final String nombre, final String email, final String password) {
         super(dni, nombre, email, password, Role.ADMINISTRADOR);
     }
 }

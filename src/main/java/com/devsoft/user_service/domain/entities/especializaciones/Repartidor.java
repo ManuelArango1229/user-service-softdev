@@ -15,7 +15,7 @@ public class Repartidor extends Usuario {
     /**
      * Vehículo asignado al repartidor.
      */
-    private String vehiculoAsignado;
+    private String metodoAsignado;
 
     /**
      * Construye una nueva instancia de Repartidor con los detalles especificados.

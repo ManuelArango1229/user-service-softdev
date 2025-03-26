@@ -26,16 +26,19 @@ public class RepartidorEntity extends UsuarioEntity {
     /**
      * Constructor para crear una nueva instancia de RepartidorEntity.
      *
-     * @param dni            El DNI del repartidor que servirá como identificador
-     *                       único
-     * @param nombre         El nombre completo del repartidor
-     * @param email          El correo electrónico del repartidor
-     * @param password       La contraseña del repartidor (debe estar encriptada
-     *                       antes de llegar aquí)
-     * @param metodoAsignado El método de entrega asignado al repartidor
+     * @param dni                 El DNI del repartidor que servirá como
+     *                            identificador
+     *                            único
+     * @param nombre              El nombre completo del repartidor
+     * @param email               El correo electrónico del repartidor
+     * @param password            La contraseña del repartidor (debe estar
+     *                            encriptada
+     *                            antes de llegar aquí)
+     * @param metodoAsignadoParam El método de entrega asignado al repartidor
      */
-    public RepartidorEntity(String dni, String nombre, String email, String password, String metodoAsignado) {
+    public RepartidorEntity(final String dni, final String nombre, final String email, final String password,
+            final String metodoAsignadoParam) {
         super(dni, nombre, email, password, Role.REPARTIDOR);
-        this.metodoAsignado = metodoAsignado;
+        this.metodoAsignado = metodoAsignadoParam;
     }
 }
