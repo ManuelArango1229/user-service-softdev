@@ -27,8 +27,8 @@ public class UsuarioEntityMapper {
     }
 
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
-     * UsuarioEntity.
+     * Convierte una entidad de base de datos UsuarioEntity a una entidad del
+     * dominio Usuario.
      *
      * @param usuarioEntity usuario la entidad de dominio que contiene la
      *                      información del usuario

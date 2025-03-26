@@ -7,11 +7,11 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.especializaci
  * ClienteEntityMapper es una clase de utilidad que proporciona métodos para
  * convertir
  * entre entidades de dominio y entidades de base de datos relacionadas con
- * usuarios.
+ * clientes.
  */
 public class ClienteEntityMapper {
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
+     * Convierte una entidad de dominio Cliente a una entidad de base de datos
      * ClienteEntity.
      *
      * @param usuario la entidad de dominio que contiene la
@@ -29,8 +29,8 @@ public class ClienteEntityMapper {
     }
 
     /**
-     * Convierte una entidad de dominio Usuario a una entidad de base de datos
-     * ClienteEntity.
+     * Convierte una entidad de cliente de base de datos ClienteEntity a una entidad
+     * del dominio Cliente.
      *
      * @param usuarioEntity usuario la entidad de dominio que contiene la
      *                      información del usuario

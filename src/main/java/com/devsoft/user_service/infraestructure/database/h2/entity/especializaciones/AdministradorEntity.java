@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 
 /**
- * Entidad que representa a un Cliente en la base de datos H2.
+ * Entidad que representa a un administrador en la base de datos H2.
  * Extiende de {@link UsuarioEntity} heredando sus atributos base y agregando
- * la especialización necesaria para el rol de Cliente.
+ * la especialización necesaria para el rol de Administrador.
  *
  * @see UsuarioEntity
  * @see Role
@@ -22,12 +22,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AdministradorEntity extends UsuarioEntity {
     /**
-     * Constructor para crear una nueva instancia de ClienteEntity.
+     * Constructor para crear una nueva instancia de AdministradorEntity.
      *
-     * @param dni      El DNI del cliente que servirá como identificador único
-     * @param nombre   El nombre completo del cliente
-     * @param email    El correo electrónico del cliente
-     * @param password La contraseña del cliente (debe estar encriptada antes de
+     * @param dni      El DNI del administrador que servirá como identificador único
+     * @param nombre   El nombre completo del administrador
+     * @param email    El correo electrónico del administrador
+     * @param password La contraseña del administrador (debe estar encriptada antes
+     *                 de
      *                 llegar aquí)
      */
     public AdministradorEntity(final String dni, final String nombre, final String email, final String password) {
