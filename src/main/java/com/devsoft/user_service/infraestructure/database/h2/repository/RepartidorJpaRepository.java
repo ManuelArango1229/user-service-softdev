@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
+import com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones.RepartidorEntity;
 
 /**
  * RepartidorJpaRepository es una interfaz que extiende JpaRepository para
@@ -15,8 +15,8 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity
  * RepartidorEntity
  * </p>
  */
-public interface UsuarioJpaRepository
-        extends JpaRepository<UsuarioEntity, String> {
+public interface RepartidorJpaRepository
+        extends JpaRepository<RepartidorEntity, String> {
 
     /**
      * Busca un usuario en la base de datos por su dirección de correo electrónico.
@@ -27,7 +27,7 @@ public interface UsuarioJpaRepository
      *         si se encuentra en la base de datos, o un {@code Optional.empty()} si
      *         no existe.
      */
-    Optional<UsuarioEntity> findByEmail(String email);
+    Optional<RepartidorEntity> findByEmail(String email);
 
     /**
      * Método que permite buscar un usuario por su DNI.
@@ -35,5 +35,5 @@ public interface UsuarioJpaRepository
      * @param dni el DNI del usuario a buscar
      * @return la entidad de dominio RepartidorEntity
      */
-    UsuarioEntity findByDni(String dni);
+    RepartidorEntity findByDni(String dni);
 }

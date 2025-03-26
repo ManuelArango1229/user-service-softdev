@@ -8,7 +8,7 @@ import com.devsoft.user_service.domain.value_objects.Role;
  * La clase Usuario representa a un usuario en el sistema.
  * Contiene información básica como DNI, nombre, email, contraseña y rol.
  */
-public final class Usuario {
+public class Usuario {
     /**
      * Identificador único del usuario.
      */

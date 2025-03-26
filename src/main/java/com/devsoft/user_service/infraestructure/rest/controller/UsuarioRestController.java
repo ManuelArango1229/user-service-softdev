@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.infraestructure.rest.dto.AutenticacionResponseDto;
 import com.devsoft.user_service.infraestructure.rest.dto.UsuarioLoginRequestDto;
-import com.devsoft.user_service.infraestructure.rest.dto.UsuarioRequestDto;
-import com.devsoft.user_service.infraestructure.rest.mapper.UsuarioDtoMapper;
 import com.devsoft.user_service.use_cases.UsuarioLoginInteractor;
 import com.devsoft.user_service.use_cases.UsuarioRegistroInteractor;
-import com.devsoft.user_service.use_cases.UsuarioUpdateInteractor;
+import com.devsoft.user_service.use_cases.dtos.UsuarioRegisterDto;
 
 import jakarta.validation.Valid;
 
@@ -39,11 +36,6 @@ public class UsuarioRestController {
     private final UsuarioLoginInteractor usuarioLoginInteractor;
 
     /**
-     * Servicio de interacción para la actualización del usuario.
-     */
-    private final UsuarioUpdateInteractor usuarioUpdateInteractor;
-
-    /**
      * Registra un nuevo usuario.
      *
      * @param usuarioDto el objeto de transferencia de datos del usuario que
@@ -53,10 +45,9 @@ public class UsuarioRestController {
      *         400 (BAD REQUEST) en caso de error.
      */
     @PostMapping("/registro")
-    public ResponseEntity<?> registrarUsuario(@Valid @RequestBody final UsuarioRequestDto usuarioDto) {
+    public ResponseEntity<?> registrarUsuario(@Valid @RequestBody final UsuarioRegisterDto usuarioDto) {
         try {
-            Usuario user = UsuarioDtoMapper.mapToEntity(usuarioDto);
-            usuarioRegistroInteractor.save(user);
+            usuarioRegistroInteractor.execute(usuarioDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado exitosamente.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
