@@ -43,18 +43,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/auth/**").permitAll() // Permitir acceso público
-                        .requestMatchers("/usuario/**").hasRole("ADMINISTRADOR") 
-                        .anyRequest().authenticated() // Requerir autenticación en otras rutas
+                        .requestMatchers("/h2-console/**", "/auth/**").permitAll()
+                        .requestMatchers("/usuario/**").hasRole("ADMINISTRADOR")
+                        .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**").disable()) // Deshabilitar CSRF solo para
-                                                                                        // H2 Console
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())) // Permitir iframes
-                                                                                                  // para H2 Console
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No
-                                                                                                              // sesiones
-                .authenticationProvider(authProvider) // Configurar autenticación
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Filtro JWT
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**").disable())
+
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
+
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                .authenticationProvider(authProvider)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
