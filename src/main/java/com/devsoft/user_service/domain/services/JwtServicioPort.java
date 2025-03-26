@@ -9,18 +9,20 @@ public interface JwtServicioPort {
      * Genera un token JWT para un usuario.
      *
      * @param usuario Identificador del usuario autenticado.
+     * @param role    Rol del usuario autenticado.
      * @return Token JWT generado.
      */
-    String obtenerToken(String usuario);
+    String obtenerToken(String usuario, String role);
 
     /**
      * Genera un token JWT con información adicional (claims).
      *
      * @param claims Datos adicionales a incluir en el token.
      * @param usuario Identificador del usuario autenticado.
+     * @param role    Rol del usuario autenticado.
      * @return Token JWT generado.
      */
-    String obtenerToken(Map<String, Object> claims, String usuario);
+    String obtenerToken(Map<String, Object> claims, String usuario, String role);
 
     /**
      * Obtiene todos los claims (datos) contenidos en un token JWT.

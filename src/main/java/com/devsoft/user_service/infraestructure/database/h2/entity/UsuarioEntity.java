@@ -11,6 +11,8 @@ import com.devsoft.user_service.domain.value_objects.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -49,6 +51,7 @@ public class UsuarioEntity implements UserDetails {
     /**
      * Atributo que representa el rol del usuario.
      */
+    @Enumerated(EnumType.STRING)
     private Role rol;
 
     /**
