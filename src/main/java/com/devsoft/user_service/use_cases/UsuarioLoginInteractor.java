@@ -49,7 +49,7 @@ public class UsuarioLoginInteractor {
         String username = userDetailsService.getUsername(usuario);
 
         // Genera el token JWT con el username
-        String token = jwtServicio.obtenerToken(username);
+        String token = jwtServicio.obtenerToken(username, usuario.getRole().name());
 
         // Retorna la respuesta con el token generado
         return token;
