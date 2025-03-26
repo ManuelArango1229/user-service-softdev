@@ -20,16 +20,16 @@ public class Repartidor extends Usuario {
     /**
      * Construye una nueva instancia de Repartidor con los detalles especificados.
      *
-     * @param dniParam              el identificador único del repartidor
-     * @param nombreParam           el nombre del repartidor
-     * @param emailParam            el correo electrónico del repartidor
-     * @param passwordParam         la contraseña del repartidor
-     * @param vehiculoAsignadoParam vehiculo Asignado el método de entrega asignado
-     *                              al repartidor
+     * @param dniParam            el identificador único del repartidor
+     * @param nombreParam         el nombre del repartidor
+     * @param emailParam          el correo electrónico del repartidor
+     * @param passwordParam       la contraseña del repartidor
+     * @param metodoAsignadoParam vehiculo Asignado el método de entrega asignado
+     *                            al repartidor
      */
     public Repartidor(final String dniParam, final String nombreParam, final String emailParam,
-            final String passwordParam, final String vehiculoAsignadoParam) {
+            final String passwordParam, final String metodoAsignadoParam) {
         super(dniParam, nombreParam, emailParam, passwordParam, "REPARTIDOR");
-        this.vehiculoAsignado = vehiculoAsignadoParam;
+        this.metodoAsignado = metodoAsignadoParam;
     }
 }

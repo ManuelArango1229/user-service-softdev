@@ -6,6 +6,7 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 /**
  * Entidad que representa a un Cliente en la base de datos H2.
@@ -18,6 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "administradores")
 @PrimaryKeyJoinColumn(name = "dni")
+@NoArgsConstructor
 public class AdministradorEntity extends UsuarioEntity {
     /**
      * Constructor para crear una nueva instancia de ClienteEntity.

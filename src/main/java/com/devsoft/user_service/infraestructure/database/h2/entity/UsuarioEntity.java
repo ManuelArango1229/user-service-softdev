@@ -12,7 +12,8 @@ import com.devsoft.user_service.domain.value_objects.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Builder;
@@ -23,7 +24,7 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@PrimaryKeyJoinColumn(name = "dni")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @Builder
 public class UsuarioEntity implements UserDetails {

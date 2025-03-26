@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -19,6 +20,7 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "dni")
 @Getter
 @Setter
+@NoArgsConstructor
 public class RepartidorEntity extends UsuarioEntity {
     /** Representa el método de entrega asignado al repartidor. */
     private String metodoAsignado;

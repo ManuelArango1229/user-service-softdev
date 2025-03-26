@@ -51,6 +51,7 @@ public class UsuarioRegistroInteractor {
      */
     public Usuario execute(final UsuarioRegisterDto usuario) {
         Usuario user;
+        System.out.println("Usuario: " + usuario.getRole());
         switch (usuario.getRole()) {
             case "CLIENTE":
                 user = clienteRepository.findByDni(usuario.getDni()).orElse(null);
