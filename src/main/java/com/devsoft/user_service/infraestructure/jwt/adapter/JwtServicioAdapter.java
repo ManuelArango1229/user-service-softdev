@@ -34,11 +34,12 @@ public class JwtServicioAdapter implements JwtServicioPort {
      * Genera un token JWT para un usuario específico sin incluir información adicional.
      *
      * @param username el nombre de usuario para el cual se generará el token.
+     * @param role     el rol del usuario para el cual se generará el token.
      * @return el token JWT generado.
      */
     @Override
-    public String obtenerToken(final String username) {
-        return obtenerToken(new HashMap<>(), username);
+    public String obtenerToken(final String username, final String role) {
+        return obtenerToken(new HashMap<>(), username, role);
     }
 
     /**
@@ -49,10 +50,11 @@ public class JwtServicioAdapter implements JwtServicioPort {
      * @return el token JWT generado.
      */
     @Override
-    public String obtenerToken(final Map<String, Object> claims, final String username) {
+    public String obtenerToken(final Map<String, Object> claims, final String username, final String role) {
         return Jwts
                 .builder()
                 .claims(claims)
+                .claim("rol", role)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION))

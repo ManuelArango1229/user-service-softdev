@@ -24,6 +24,7 @@ class JwtServicioAdapterTest {
 
     private static final String SECRET_KEY = "mysupersecretkeymysupersecretkeymysupersecretkey";
     private static final String USERNAME = "testuser";
+    private static final String DEFAULT_ROLE = "USER";
 
     @BeforeEach
     void setUp() {
@@ -33,21 +34,21 @@ class JwtServicioAdapterTest {
     @Test
     @DisplayName("Debe generar un token válido para un usuario")
     void testObtenerToken() {
-        String token = jwtServicioAdapter.obtenerToken(USERNAME);
+        String token = jwtServicioAdapter.obtenerToken(USERNAME, DEFAULT_ROLE);
         assertNotNull(token, "El token no debería ser nulo");
     }
 
     @Test
     @DisplayName("Debe validar correctamente un token generado")
     void testValidarToken() {
-        String token = jwtServicioAdapter.obtenerToken(USERNAME);
+        String token = jwtServicioAdapter.obtenerToken(USERNAME, DEFAULT_ROLE);
         assertTrue(jwtServicioAdapter.validarToken(token, USERNAME), "El token debería ser válido");
     }
 
     @Test
     @DisplayName("Debe extraer el nombre de usuario del token correctamente")
     void testObtenerUsernameDesdeToken() {
-        String token = jwtServicioAdapter.obtenerToken(USERNAME);
+        String token = jwtServicioAdapter.obtenerToken(USERNAME, DEFAULT_ROLE);
         String extractedUsername = jwtServicioAdapter.obtenerUsernameDesdeToken(token);
         assertEquals(USERNAME, extractedUsername, "El nombre de usuario extraído debe coincidir");
     }
@@ -71,7 +72,7 @@ class JwtServicioAdapterTest {
     void testObtenerTodosLosClaims() {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", "ADMIN");
-        String token = jwtServicioAdapter.obtenerToken(claims, USERNAME);
+        String token = jwtServicioAdapter.obtenerToken(claims, USERNAME, DEFAULT_ROLE);
 
         Map<String, Object> extractedClaims = jwtServicioAdapter.obtenerTodosLosClaims(token);
         assertEquals("ADMIN", extractedClaims.get("role"), "El claim 'role' debería ser 'ADMIN'");
