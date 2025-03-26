@@ -19,17 +19,20 @@ import lombok.RequiredArgsConstructor;
 /**
  * Configuración de la autenticación en la aplicación.
  *
- * Define y expone un {@link AuthenticationProvider} como un bean de Spring Security.
+ * Define y expone un {@link AuthenticationProvider} como un bean de Spring
+ * Security.
  */
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
     /**
-     * Configura y proporciona un {@link AuthenticationManager} basado en {@link AuthenticationConfiguration}.
+     * Configura y proporciona un {@link AuthenticationManager} basado en
+     * {@link AuthenticationConfiguration}.
      *
      * @param config La configuración de autenticación.
-     * @return Un {@link AuthenticationManager} que utiliza {@link AuthenticationConfiguration}
+     * @return Un {@link AuthenticationManager} que utiliza
+     *         {@link AuthenticationConfiguration}
      *         para la configuración de autenticación.
      * @throws Exception Si ocurre un error en la configuración de autenticación.
      */
@@ -49,10 +52,12 @@ public class ApplicationConfig {
     private final PasswordEncoderAdapter passwordEncoderAdapter;
 
     /**
-     * Configura y proporciona un {@link AuthenticationProvider} basado en {@link DaoAuthenticationProvider}.
+     * Configura y proporciona un {@link AuthenticationProvider} basado en
+     * {@link DaoAuthenticationProvider}.
      *
      * @return Un {@link AuthenticationProvider} que utiliza UserDetailService
-     *         para la carga de detalles del usuario y {@link PasswordEncoderAdapter} para la codificación de contraseñas.
+     *         para la carga de detalles del usuario y
+     *         {@link PasswordEncoderAdapter} para la codificación de contraseñas.
      */
     @Bean
     AuthenticationProvider authenticationProvider() {
@@ -63,16 +68,18 @@ public class ApplicationConfig {
     }
 
     /**
-     * Configura y proporciona un {@link UserDetailsService} basado en {@link UserDetailsService}.
+     * Configura y proporciona un {@link UserDetailsService} basado en
+     * {@link UserDetailsService}.
      *
-     * @return Un {@link UserDetailsService} que utiliza {@link UsuarioRepositoryAdapter}
+     * @return Un {@link UserDetailsService} que utiliza
+     *         {@link UsuarioRepositoryAdapter}
      *         para la carga de detalles del usuario.
      */
     @Primary
     @Bean
     UserDetailsService userDetailService() {
         return username -> UsuarioEntityMapper.toUsuarioEntity(userRepository.findByEmail(username)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found")));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found")));
     }
 
 }
