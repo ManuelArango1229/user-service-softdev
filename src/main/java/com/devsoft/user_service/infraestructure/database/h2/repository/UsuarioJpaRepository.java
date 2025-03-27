@@ -36,4 +36,11 @@ public interface UsuarioJpaRepository
      * @return la entidad de dominio RepartidorEntity
      */
     UsuarioEntity findByDni(String dni);
+
+    /**
+     * Método que permite eliminar un usuario por su DNI.
+     *
+     * @param dni el DNI del usuario a eliminar
+     */
+    void deleteByDni(String dni);
 }
