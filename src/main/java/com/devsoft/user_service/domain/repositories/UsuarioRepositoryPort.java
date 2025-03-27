@@ -32,9 +32,9 @@ public interface UsuarioRepositoryPort {
      * @return usuario
      */
     Optional<Usuario> findByDni(String dni);
-    /*
+    /**
      * Metodo que elimina un usuario por su DNI.
-     * 
+     *
      * @param dni
      */
     void deleteByDni(String dni);
