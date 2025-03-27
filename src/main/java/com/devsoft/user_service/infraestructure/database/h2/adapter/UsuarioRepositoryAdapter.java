@@ -80,7 +80,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     }
     /**
      * Elimina un usuario de la base de datos por su DNI.
-     * 
+     *
      * @param dni El DNI del repartidor a eliminar
      */
     @Override
