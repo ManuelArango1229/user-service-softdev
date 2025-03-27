@@ -26,16 +26,20 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class UsuarioUpdateDto {
-    /**
-     * El nombre del usuario.
-     */
+    /** Nombre completo del usuario. */
     private String nombre;
-    /**
-     * El correo electrónico del usuario.
-     */
+    /** Dirección de correo electrónico del usuario. */
     private String email;
-    /**
-     * La contraseña del usuario.
-     */
+    /** Contraseña del usuario. */
     private String password;
+    /** Identificador del vehículo asignado al usuario (si aplica). */
+    private String vehiculoAsignado;
+    /** Edad del usuario. */
+    private int edad;
+    /** Dirección del usuario. */
+    private String address;
+    /** Género del usuario. */
+    private String genero;
+    /** Teléfono del usuario. */
+    private String phoneNumber;
 }
