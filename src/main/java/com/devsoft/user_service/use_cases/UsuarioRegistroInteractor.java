@@ -70,7 +70,6 @@ public class UsuarioRegistroInteractor {
             throw new IllegalArgumentException("El rol no puede ser null o vacío.");
         }
         Usuario user;
-        System.out.println("Usuario: " + usuario.getRole());
         switch (usuario.getRole()) {
             case "CLIENTE":
                 user = clienteRepository.findByDni(usuario.getDni()).orElse(null);
@@ -94,20 +93,20 @@ public class UsuarioRegistroInteractor {
         switch (usuario.getRole()) {
             case "CLIENTE":
                 return clienteRepository.save(new Cliente(
-                    usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
-                    usuario.getPassword(), usuario.getEdad(),
-                    usuario.getAddress(), usuario.getGenero(), usuario.getPhoneNumber()));
+                        usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
+                        usuario.getPassword(), usuario.getEdad(),
+                        usuario.getAddress(), usuario.getGenero(), usuario.getPhoneNumber()));
             case "ADMINISTRADOR":
                 return administradorRepository.save(new Administrador(
-                    usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
-                    usuario.getPassword()));
+                        usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
+                        usuario.getPassword()));
             case "REPARTIDOR":
                 if (usuario.getVehiculoAsignado() == null) {
                     throw new IllegalArgumentException("El vehículo asignado no puede ser null para un repartidor.");
                 }
                 return repartidorRepository.save(new Repartidor(
-                    usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
-                    usuario.getPassword(), usuario.getVehiculoAsignado()));
+                        usuario.getDni(), usuario.getNombre(), usuario.getEmail(),
+                        usuario.getPassword(), usuario.getVehiculoAsignado()));
             default:
                 throw new RolInvalidoErrorException("Rol no válido: " + usuario.getRole());
         }

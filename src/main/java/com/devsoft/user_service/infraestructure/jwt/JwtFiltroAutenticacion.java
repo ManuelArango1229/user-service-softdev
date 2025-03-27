@@ -39,9 +39,9 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
     /** Prefijo estándar para los tokens JWT en los encabezados de autorización. */
     private static final String TOKEN_PREFIX = "Bearer ";
 
-
     /**
-     * Filtra cada solicitud HTTP para verificar la presencia y validez de un token JWT.
+     * Filtra cada solicitud HTTP para verificar la presencia y validez de un token
+     * JWT.
      * Si el token es válido, autentica al usuario en el contexto de seguridad.
      *
      * @param request     la solicitud HTTP entrante.
@@ -52,7 +52,7 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(final HttpServletRequest request,
-        final HttpServletResponse response, final FilterChain filterChain)
+            final HttpServletResponse response, final FilterChain filterChain)
             throws ServletException, IOException {
 
         final String token = obtenerTokenDeLaPeticion(request);
@@ -66,25 +66,19 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
         username = jwtServicio.obtenerUsernameDesdeToken(token);
         String rol = jwtServicio.obtenerClaim(token, claims -> (String) claims.get("rol"));
 
-        System.out.println("Rol desde filtro de autenticación jwt: " + rol);
-
-
         if (username != null
-            && SecurityContextHolder.getContext().getAuthentication() == null) {
+                && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (jwtServicio.validarToken(token, userDetails.getUsername())) {
 
-                UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, Collections.singleton(
-                            new SimpleGrantedAuthority("ROLE_" + rol)
-                        )
-                );
+                                new SimpleGrantedAuthority("ROLE_" + rol)));
 
                 authToken.setDetails(new WebAuthenticationDetailsSource()
-                    .buildDetails(request));
+                        .buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
@@ -97,7 +91,8 @@ public class JwtFiltroAutenticacion extends OncePerRequestFilter {
      * Extrae el token JWT del encabezado de autorización de la solicitud HTTP.
      *
      * @param request la solicitud HTTP entrante.
-     * @return el token JWT si está presente y tiene el formato correcto, o {@code null} si no está presente.
+     * @return el token JWT si está presente y tiene el formato correcto, o
+     *         {@code null} si no está presente.
      */
     private String obtenerTokenDeLaPeticion(final HttpServletRequest request) {
 
