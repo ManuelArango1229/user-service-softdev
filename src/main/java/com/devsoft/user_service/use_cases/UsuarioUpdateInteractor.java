@@ -3,6 +3,13 @@ package com.devsoft.user_service.use_cases;
 import org.springframework.stereotype.Component;
 
 import com.devsoft.user_service.domain.entities.Usuario;
+import com.devsoft.user_service.domain.entities.especializaciones.Administrador;
+import com.devsoft.user_service.domain.entities.especializaciones.Cliente;
+import com.devsoft.user_service.domain.entities.especializaciones.Repartidor;
+import com.devsoft.user_service.domain.exceptions.RolInvalidoErrorException;
+import com.devsoft.user_service.domain.repositories.AdministradorRepositoryPort;
+import com.devsoft.user_service.domain.repositories.ClienteRepositoryPort;
+import com.devsoft.user_service.domain.repositories.RepartidorRepositoryPort;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
 import com.devsoft.user_service.domain.services.PasswordEncoderPort;
 import com.devsoft.user_service.domain.value_objects.Email;
@@ -43,7 +50,19 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class UsuarioUpdateInteractor {
     /**
-     * REPOSITORIO DE USUARIOS.
+     * REPOSITORIO DE CLIENTE.
+     */
+    private final ClienteRepositoryPort clienteRepository;
+    /**
+     * REPOSITORIO DE ADMINISTRADORES.
+     */
+    private final AdministradorRepositoryPort administradorRepository;
+    /**
+     * REPOSITORIO DE REPARTIDORES.
+     */
+    private final RepartidorRepositoryPort repartidorRepository;
+    /**
+     * REPOSITORIO DE REPARTIDORES.
      */
     private final UsuarioRepositoryPort usuarioRepository;
     /**
@@ -63,20 +82,60 @@ public class UsuarioUpdateInteractor {
      *                                      en uso.
      */
     public Usuario execute(final String userId, final UsuarioUpdateDto updatedData) {
-        Usuario user = usuarioRepository.findByDni(userId)
-                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado: " + userId));
-        if (updatedData.getEmail() != null) {
-            user.setEmail(new Email(updatedData.getEmail()));
+        Usuario existingUser = usuarioRepository.findByDni(userId)
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
+        switch (existingUser.getRole()) {
+            case ADMINISTRADOR:
+                Administrador administradorUpdate = administradorRepository.findByDni(userId).orElseThrow();
+                if (updatedData.getNombre() != null) {
+                    administradorUpdate.setNombre(updatedData.getNombre());
+                }
+                if (updatedData.getEmail() != null) {
+                    administradorUpdate.setEmail(new Email(updatedData.getEmail()));
+                }
+                if (updatedData.getPassword() != null) {
+                    administradorUpdate.setPassword(passwordEncoder.encode(updatedData.getPassword()));
+                }
+                return administradorRepository.save(administradorUpdate);
+            case CLIENTE:
+                Cliente clienteUpdate = clienteRepository.findByDni(userId).orElseThrow();
+                if (updatedData.getNombre() != null) {
+                    clienteUpdate.setNombre(updatedData.getNombre());
+                }
+                if (updatedData.getEmail() != null) {
+                    clienteUpdate.setEmail(new Email(updatedData.getEmail()));
+                }
+                if (updatedData.getPassword() != null) {
+                    clienteUpdate.setPassword(passwordEncoder.encode(updatedData.getPassword()));
+                }
+                if (updatedData.getEdad() != 0) {
+                    clienteUpdate.setEdad(updatedData.getEdad());
+                }
+                if (updatedData.getAddress() != null) {
+                    clienteUpdate.setDireccion(updatedData.getAddress());
+                }
+                if (updatedData.getGenero() != null) {
+                    clienteUpdate.setGenero(updatedData.getGenero());
+                }
+                return clienteRepository.save(clienteUpdate);
+            case REPARTIDOR:
+                Repartidor reparticorUpdate = repartidorRepository.findByDni(userId).orElseThrow();
+                if (updatedData.getNombre() != null) {
+                    reparticorUpdate.setNombre(updatedData.getNombre());
+                }
+                if (updatedData.getEmail() != null) {
+                    reparticorUpdate.setEmail(new Email(updatedData.getEmail()));
+                }
+                if (updatedData.getPassword() != null) {
+                    reparticorUpdate.setPassword(passwordEncoder.encode(updatedData.getPassword()));
+                }
+                if (updatedData.getVehiculoAsignado() != null) {
+                    reparticorUpdate.setMetodoAsignado(updatedData.getVehiculoAsignado());
+                }
+                return repartidorRepository.save(reparticorUpdate);
+            default:
+                throw new RolInvalidoErrorException("Rol no válido");
         }
 
-        if (updatedData.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(updatedData.getPassword()));
-        }
-
-        if (updatedData.getNombre() != null) {
-            user.setNombre(updatedData.getNombre());
-        }
-
-        return usuarioRepository.save(user);
     }
 }
