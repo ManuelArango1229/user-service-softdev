@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.devsoft.user_service.infraestructure.database.encoder.adapter.PasswordEncoderAdapter;
-import com.devsoft.user_service.infraestructure.database.h2.adapter.UsuarioRepositoryAdapter;
+import com.devsoft.user_service.infraestructure.database.postgres.adapter.UsuarioRepositoryAdapter;
 
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import java.util.Optional;
