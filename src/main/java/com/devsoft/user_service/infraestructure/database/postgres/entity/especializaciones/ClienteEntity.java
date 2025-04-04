@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones;
+package com.devsoft.user_service.infraestructure.database.postgres.entity.especializaciones;
 
 import org.springframework.context.annotation.Profile;
 
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Profile("h2")
+@Profile("postgres")
 public class ClienteEntity extends UsuarioEntity {
     /**
      * Edad del cliente.

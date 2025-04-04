@@ -1,15 +1,15 @@
-package com.devsoft.user_service.infraestructure.database.h2.adapter;
+package com.devsoft.user_service.infraestructure.database.postgres.adapter;
 
 import java.util.Optional;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.devsoft.user_service.domain.entities.Usuario;
-import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
-import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
-import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
-import com.devsoft.user_service.infraestructure.database.h2.repository.UsuarioJpaRepository;
+import com.devsoft.user_service.domain.entities.especializaciones.Repartidor;
+import com.devsoft.user_service.domain.repositories.RepartidorRepositoryPort;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.especializaciones.RepartidorEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.mapper.RepartidorEntityMapper;
+import com.devsoft.user_service.infraestructure.database.postgres.repository.RepartidorJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,12 +32,12 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Component
-@Profile("h2")
-public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
+@Profile("postgres")
+public class RepartidorRepositoryAdapter implements RepartidorRepositoryPort {
     /**
      * Repositorio JPA para operaciones de persistencia de Repartidores.
      */
-    private final UsuarioJpaRepository usuarioJpaRepository;
+    private final RepartidorJpaRepository repartidorJpaRepository;
 
     /**
      * Guarda un nuevo repartidor o actualiza uno existente en la base de datos.
@@ -46,10 +46,10 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
      * @return El repartidor guardado con su información actualizada
      */
     @Override
-    public Usuario save(final Usuario usuario) {
-        UsuarioEntity usuarioEntity = UsuarioEntityMapper.toUsuarioEntity(usuario);
-        Usuario saveUser = UsuarioEntityMapper
-                .toUsuario(usuarioJpaRepository.save(usuarioEntity));
+    public Repartidor save(final Repartidor usuario) {
+        RepartidorEntity usuarioEntity = RepartidorEntityMapper.toRepartidorEntity(usuario);
+        Repartidor saveUser = RepartidorEntityMapper
+                .toRepartidor(repartidorJpaRepository.save(usuarioEntity));
         return saveUser;
 
     }
@@ -62,9 +62,9 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
      *         encuentra
      */
     @Override
-    public Optional<Usuario> findByEmail(final String email) {
-        return Optional.ofNullable(usuarioJpaRepository.findByEmail(email))
-                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity.get()));
+    public Optional<Repartidor> findByEmail(final String email) {
+        return Optional.ofNullable(repartidorJpaRepository.findByEmail(email))
+                .map(usuarioEntity -> RepartidorEntityMapper.toRepartidor(usuarioEntity.get()));
     }
 
     /**
@@ -75,19 +75,10 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
      *         encuentra
      */
     @Override
-    public Optional<Usuario> findByDni(final String dni) {
-        return Optional.ofNullable(usuarioJpaRepository.findByDni(dni))
-                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity));
+    public Optional<Repartidor> findByDni(final String dni) {
+        return Optional.ofNullable(repartidorJpaRepository.findByDni(dni))
+                .map(usuarioEntity -> RepartidorEntityMapper.toRepartidor(usuarioEntity));
 
     }
 
-    /**
-     * Elimina un usuario de la base de datos por su DNI.
-     *
-     * @param dni El DNI del repartidor a eliminar
-     */
-    @Override
-    public void deleteByDni(final String dni) {
-        usuarioJpaRepository.deleteByDni(dni);
-    }
 }

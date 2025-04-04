@@ -2,6 +2,7 @@ package com.devsoft.user_service.infraestructure.database.h2.adapter;
 
 import java.util.Optional;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.devsoft.user_service.domain.entities.especializaciones.Repartidor;
@@ -31,6 +32,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Component
+@Profile("h2")
 public class RepartidorRepositoryAdapter implements RepartidorRepositoryPort {
     /**
      * Repositorio JPA para operaciones de persistencia de Repartidores.

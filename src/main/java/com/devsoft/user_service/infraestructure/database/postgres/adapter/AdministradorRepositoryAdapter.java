@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.database.h2.adapter;
+package com.devsoft.user_service.infraestructure.database.postgres.adapter;
 
 import java.util.Optional;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 import com.devsoft.user_service.domain.entities.especializaciones.Administrador;
 import com.devsoft.user_service.domain.repositories.AdministradorRepositoryPort;
-import com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones.AdministradorEntity;
-import com.devsoft.user_service.infraestructure.database.h2.mapper.AdministradorEntityMapper;
-import com.devsoft.user_service.infraestructure.database.h2.repository.AdministradorJpaRepository;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.especializaciones.AdministradorEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.mapper.AdministradorEntityMapper;
+import com.devsoft.user_service.infraestructure.database.postgres.repository.AdministradorJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Component
-@Profile("h2")
+@Profile("postgres")
 public class AdministradorRepositoryAdapter implements AdministradorRepositoryPort {
     /**
      * Repositorio JPA para operaciones de persistencia de Administradores.

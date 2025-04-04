@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones;
+package com.devsoft.user_service.infraestructure.database.postgres.entity.especializaciones;
 
 import org.springframework.context.annotation.Profile;
 
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "administradores")
 @PrimaryKeyJoinColumn(name = "dni")
 @NoArgsConstructor
-@Profile("h2")
+@Profile("postgres")
 public class AdministradorEntity extends UsuarioEntity {
     /**
      * Constructor para crear una nueva instancia de AdministradorEntity.

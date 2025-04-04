@@ -1,11 +1,11 @@
-package com.devsoft.user_service.infraestructure.database.h2.repository;
+package com.devsoft.user_service.infraestructure.database.postgres.repository;
 
 import java.util.Optional;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones.ClienteEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.especializaciones.ClienteEntity;
 
 /**
  * ClienteJpaRepository es una interfaz que extiende JpaRepository para
@@ -16,7 +16,7 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.especializaci
  * ClienteEntity
  * </p>
  */
-@Profile("h2")
+@Profile("postgres")
 public interface ClienteJpaRepository
         extends JpaRepository<ClienteEntity, String> {
 

@@ -1,11 +1,11 @@
-package com.devsoft.user_service.infraestructure.database.h2.repository;
+package com.devsoft.user_service.infraestructure.database.postgres.repository;
 
 import java.util.Optional;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones.RepartidorEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.UsuarioEntity;
 
 /**
  * RepartidorJpaRepository es una interfaz que extiende JpaRepository para
@@ -16,9 +16,9 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.especializaci
  * RepartidorEntity
  * </p>
  */
-@Profile("h2")
-public interface RepartidorJpaRepository
-        extends JpaRepository<RepartidorEntity, String> {
+@Profile("postgres")
+public interface UsuarioJpaRepository
+        extends JpaRepository<UsuarioEntity, String> {
 
     /**
      * Busca un usuario en la base de datos por su dirección de correo electrónico.
@@ -29,7 +29,7 @@ public interface RepartidorJpaRepository
      *         si se encuentra en la base de datos, o un {@code Optional.empty()} si
      *         no existe.
      */
-    Optional<RepartidorEntity> findByEmail(String email);
+    Optional<UsuarioEntity> findByEmail(String email);
 
     /**
      * Método que permite buscar un usuario por su DNI.
@@ -37,5 +37,12 @@ public interface RepartidorJpaRepository
      * @param dni el DNI del usuario a buscar
      * @return la entidad de dominio RepartidorEntity
      */
-    RepartidorEntity findByDni(String dni);
+    UsuarioEntity findByDni(String dni);
+
+    /**
+     * Método que permite eliminar un usuario por su DNI.
+     *
+     * @param dni el DNI del usuario a eliminar
+     */
+    void deleteByDni(String dni);
 }

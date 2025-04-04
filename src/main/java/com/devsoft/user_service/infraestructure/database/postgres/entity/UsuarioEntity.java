@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.database.h2.entity;
+package com.devsoft.user_service.infraestructure.database.postgres.entity;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,7 +30,7 @@ import lombok.Data;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @Builder
-@Profile("h2")
+@Profile("postgres")
 public class UsuarioEntity implements UserDetails {
     /**
      * Atributo que representa el DNI del usuario.

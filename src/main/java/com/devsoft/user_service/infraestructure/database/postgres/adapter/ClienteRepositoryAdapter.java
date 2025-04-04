@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.database.h2.adapter;
+package com.devsoft.user_service.infraestructure.database.postgres.adapter;
 
 import java.util.Optional;
 
@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import com.devsoft.user_service.domain.entities.especializaciones.Cliente;
 import com.devsoft.user_service.domain.repositories.ClienteRepositoryPort;
-import com.devsoft.user_service.infraestructure.database.h2.entity.especializaciones.ClienteEntity;
-import com.devsoft.user_service.infraestructure.database.h2.mapper.ClienteEntityMapper;
-import com.devsoft.user_service.infraestructure.database.h2.repository.ClienteJpaRepository;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.especializaciones.ClienteEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.mapper.ClienteEntityMapper;
+import com.devsoft.user_service.infraestructure.database.postgres.repository.ClienteJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Component
-@Profile("h2")
+@Profile("postgres")
 public class ClienteRepositoryAdapter implements ClienteRepositoryPort {
     /**
      * ClienteJpaRepository es una interfaz que extiende JpaRepository.

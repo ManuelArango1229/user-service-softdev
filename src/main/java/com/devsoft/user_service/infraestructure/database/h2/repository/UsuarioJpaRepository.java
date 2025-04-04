@@ -2,6 +2,7 @@ package com.devsoft.user_service.infraestructure.database.h2.repository;
 
 import java.util.Optional;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
@@ -15,6 +16,7 @@ import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity
  * RepartidorEntity
  * </p>
  */
+@Profile("h2")
 public interface UsuarioJpaRepository
         extends JpaRepository<UsuarioEntity, String> {
 

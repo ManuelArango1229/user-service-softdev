@@ -1,4 +1,4 @@
-package com.devsoft.user_service.infraestructure.database.h2.adapter;
+package com.devsoft.user_service.infraestructure.database.postgres.adapter;
 
 import java.util.Optional;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 import com.devsoft.user_service.domain.entities.Usuario;
 import com.devsoft.user_service.domain.repositories.UsuarioRepositoryPort;
-import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
-import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
-import com.devsoft.user_service.infraestructure.database.h2.repository.UsuarioJpaRepository;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.UsuarioEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.mapper.UsuarioEntityMapper;
+import com.devsoft.user_service.infraestructure.database.postgres.repository.UsuarioJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Component
-@Profile("h2")
+@Profile("postgres")
 public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
     /**
      * Repositorio JPA para operaciones de persistencia de Repartidores.

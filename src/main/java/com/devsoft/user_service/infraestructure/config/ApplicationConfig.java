@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.devsoft.user_service.infraestructure.database.encoder.adapter.PasswordEncoderAdapter;
-import com.devsoft.user_service.infraestructure.database.h2.adapter.UsuarioRepositoryAdapter;
-import com.devsoft.user_service.infraestructure.database.h2.mapper.UsuarioEntityMapper;
+import com.devsoft.user_service.infraestructure.database.postgres.adapter.UsuarioRepositoryAdapter;
+import com.devsoft.user_service.infraestructure.database.postgres.mapper.UsuarioEntityMapper;
 
 import lombok.RequiredArgsConstructor;
 
