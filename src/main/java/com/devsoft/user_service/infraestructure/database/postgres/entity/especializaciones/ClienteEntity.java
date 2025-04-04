@@ -3,7 +3,7 @@ package com.devsoft.user_service.infraestructure.database.postgres.entity.especi
 import org.springframework.context.annotation.Profile;
 
 import com.devsoft.user_service.domain.value_objects.Role;
-import com.devsoft.user_service.infraestructure.database.h2.entity.UsuarioEntity;
+import com.devsoft.user_service.infraestructure.database.postgres.entity.UsuarioEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
