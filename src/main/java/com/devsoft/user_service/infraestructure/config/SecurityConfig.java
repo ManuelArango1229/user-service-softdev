@@ -44,7 +44,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "/auth/**", "/doc/**").permitAll()
-                        .requestMatchers("/usuario/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers("/usuario/actualizar/**").hasRole("CLIENTE")
+                        .requestMatchers("/usuario/eliminar/**").hasRole("ADMINISTRADOR")
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**").disable())
