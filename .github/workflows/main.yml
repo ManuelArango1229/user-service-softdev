@@ -24,8 +24,8 @@ jobs:
 
       - name: 🏗️ Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/user-service:latest .
+          docker build -t manuelarango1229/softdev:user-service .
 
       - name: 📤 Push image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/user-service:latest
+          docker push manuelarango1229/softdev:user-service
