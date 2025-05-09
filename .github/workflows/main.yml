@@ -11,6 +11,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: docker-secrets
 
     steps:
       - name: 📥 Checkout del código
