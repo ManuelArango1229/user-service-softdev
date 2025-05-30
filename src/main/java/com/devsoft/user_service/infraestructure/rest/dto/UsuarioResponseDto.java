@@ -2,6 +2,8 @@ package com.devsoft.user_service.infraestructure.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * UsuarioResponseDto es un objeto de transferencia de datos (DTO) que
@@ -10,6 +12,8 @@ import lombok.Data;
  */
 @AllArgsConstructor
 @Data
+@Getter
+@Setter
 public class UsuarioResponseDto {
     /**
      * El Documento Nacional de Identidad (DNI) del usuario.
@@ -32,4 +36,10 @@ public class UsuarioResponseDto {
      * El token JWT generado para el usuario.
      */
     private String token;
+
+    /**
+     * Constructor por defecto.
+     */
+    public UsuarioResponseDto() {
+    }
 }

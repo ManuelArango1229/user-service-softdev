@@ -63,9 +63,10 @@ public class UsuarioRepositoryAdapter implements UsuarioRepositoryPort {
      */
     @Override
     public Optional<Usuario> findByEmail(final String email) {
-        return Optional.ofNullable(usuarioJpaRepository.findByEmail(email))
-                .map(usuarioEntity -> UsuarioEntityMapper.toUsuario(usuarioEntity.get()));
+        return usuarioJpaRepository.findByEmail(email)  // Esto es Optional<UsuarioEntity>
+                .map(UsuarioEntityMapper::toUsuario);   // Mapea directamente si existe
     }
+
 
     /**
      * Busca un repartidor por su DNI.

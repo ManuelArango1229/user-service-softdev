@@ -76,13 +76,16 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @param ex
-     * @return response con el error
+     * Manejador de excepciones para la excepción UsuarioNoEncontradoException.
+     *
+     * @param ex excepción lanzada
+     * @return respuesta de error
      */
     @ExceptionHandler(UsuarioNoEncontradoException.class)
-    public ResponseEntity<Map<String, String>> handleUsuarioNoExiste(final UsuarioNoEncontradoException ex) {
+    public ResponseEntity<Map<String, String>> handleUsuarioNoEncontrado(final UsuarioNoEncontradoException ex) {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 }
+

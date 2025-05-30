@@ -1,5 +1,7 @@
 package com.devsoft.user_service.infraestructure.rest.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,8 +9,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.devsoft.user_service.infraestructure.rest.dto.RepartidorResponseDto;
+import com.devsoft.user_service.use_cases.ObtenerRepartidoresInteractor;
 import com.devsoft.user_service.use_cases.UsuarioDeleteInteractor;
 import com.devsoft.user_service.use_cases.UsuarioGetByEmailInteractor;
+import com.devsoft.user_service.use_cases.UsuarioGetByIdInteractor;
 import com.devsoft.user_service.use_cases.UsuarioUpdateInteractor;
 import com.devsoft.user_service.use_cases.dtos.UsuarioUpdateDto;
 import com.devsoft.user_service.use_cases.dtos.UsuarioResponseDto;
@@ -39,6 +45,16 @@ public class UsuarioUpdateRestController {
      * Servicio de interacción para la búsqueda de usuarios por correo electrónico.
      */
     private final UsuarioGetByEmailInteractor usuarioGetByEmailInteractor;
+
+    /**
+     * Servicio de interacción para obtener repartidores.
+     */
+    private final ObtenerRepartidoresInteractor obtenerRepartidoresInteractor;
+
+    /**
+     * Servicio de interacción para obtener un usuario por su DNI.
+     */
+    private final UsuarioGetByIdInteractor usuarioGetByIdInteractor;
 
     /**
      * Interactor para la actualización de usuarios.
@@ -110,8 +126,45 @@ public class UsuarioUpdateRestController {
      * @return Datos del usuario encontrado.
      */
     @GetMapping("/buscar/{email}")
-    public ResponseEntity<UsuarioResponseDto> buscarUsuarioPorEmail(@PathVariable final String email) {
+    public ResponseEntity<?> buscarUsuarioPorEmail(@PathVariable final String email) {
         UsuarioResponseDto usuario = usuarioGetByEmailInteractor.execute(email);
         return ResponseEntity.ok(usuario);
     }
+
+
+
+    /**
+     * Interactor para obtener todos los repartidores.
+     * <p>
+     * Permite listar todos los repartidores registrados en el sistema.
+     * </p>
+     *
+     * @return Lista de repartidores.
+     */
+    @GetMapping("/repartidores")
+    public ResponseEntity<List<RepartidorResponseDto>> obtenerRepartidores() {
+        List<RepartidorResponseDto> repartidores = obtenerRepartidoresInteractor.execute();
+        return ResponseEntity.ok(repartidores);
+    }
+
+    /**
+     * Interactor para obtener un usuario por su DNI.
+     * <p>
+     * Permite obtener los datos de un usuario a partir de su DNI.
+     * </p>
+     *
+     * <p>
+     * Usa {@link UsuarioRepositoryPort} para realizar la consulta del usuario.
+     * </p>
+     *
+     * @param dni DNI del usuario a buscar.
+     * @return Datos del usuario encontrado.
+     */
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<UsuarioResponseDto> obtenerUsuarioPorId(final @PathVariable String dni) {
+        UsuarioResponseDto usuarioDto = usuarioGetByIdInteractor.execute(dni);
+        return ResponseEntity.ok(usuarioDto);
+    }
+
+
 }

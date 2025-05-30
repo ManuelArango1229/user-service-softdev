@@ -1,5 +1,6 @@
 package com.devsoft.user_service.domain.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.devsoft.user_service.domain.entities.especializaciones.Repartidor;
@@ -31,4 +32,10 @@ public interface RepartidorRepositoryPort {
      * @return usuario
      */
     Optional<Repartidor> findByDni(String dni);
+    /**
+     * Metodo para buscar todos los repartidores.
+     *
+     * @return Lista de repartidores.
+     */
+    List<Repartidor> findAll();
 }
