@@ -44,12 +44,16 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "/auth/**", "/doc/**").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/usuario/actualizar/**").hasRole("CLIENTE")
                         .requestMatchers("/usuario/eliminar/**").hasRole("ADMINISTRADOR")
+                        //.requestMatchers("/usuario/buscar/**").hasRole("CLIENTE")
+                        .requestMatchers("/usuario/buscar/**").permitAll()
+                        .requestMatchers("/usuario/repartidores/**").permitAll()
+                        .requestMatchers("/usuario/dni/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**").disable())
-
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

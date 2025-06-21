@@ -1,5 +1,6 @@
 package com.devsoft.user_service.infraestructure.database.postgres.adapter;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.context.annotation.Profile;
@@ -78,7 +79,16 @@ public class RepartidorRepositoryAdapter implements RepartidorRepositoryPort {
     public Optional<Repartidor> findByDni(final String dni) {
         return Optional.ofNullable(repartidorJpaRepository.findByDni(dni))
                 .map(usuarioEntity -> RepartidorEntityMapper.toRepartidor(usuarioEntity));
-
     }
-
+    /**
+     * Obtiene todos los repartidores registrados en la base de datos.
+     *
+     * @return Un Iterable que contiene todos los repartidores
+     */
+    @Override
+    public List<Repartidor> findAll() {
+        return repartidorJpaRepository.findAll().stream()
+                .map(RepartidorEntityMapper::toRepartidor)
+                .toList();
+    }
 }
