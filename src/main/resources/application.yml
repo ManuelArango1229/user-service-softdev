@@ -10,7 +10,6 @@ eureka:
     instance-id: ${spring.application.name}:${POD_IP}:${server.port}
     hostname: user-service
     prefer-ip-address: false 
-    ip-address: ${POD_IP}
     health-check-url-path: /actuator/health
     status-page-url-path: /actuator/info
     lease-renewal-interval-in-seconds: 10
