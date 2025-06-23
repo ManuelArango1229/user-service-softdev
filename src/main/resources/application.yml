@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.springframework.core.env: DEBUG
+
 eureka:
   client:
     service-url:
