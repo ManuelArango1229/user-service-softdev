@@ -3,7 +3,8 @@ eureka:
     service-url:
       defaultZone: http://eureka-service:8761/eureka
   instance:
-    prefer-ip-address: false
+    prefer-ip-address: true
+    ip-address: ${POD_IP}
     health-check-url-path: /actuator/health
     status-page-url-path: /actuator/info
     lease-renewal-interval-in-seconds: 10
