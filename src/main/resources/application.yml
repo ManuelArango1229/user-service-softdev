@@ -8,7 +8,8 @@ eureka:
       defaultZone: http://eureka-service:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${POD_IP}:${server.port}
-    prefer-ip-address: true
+    hostname: user-service
+    prefer-ip-address: false 
     ip-address: ${POD_IP}
     health-check-url-path: /actuator/health
     status-page-url-path: /actuator/info
