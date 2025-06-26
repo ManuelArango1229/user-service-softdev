@@ -10,6 +10,7 @@ public class DemoApplication {
      * @param args
      */
     public static void main(final String[] args) {
+        System.out.println("IP desde env: " + System.getenv("POD_IP"));
         SpringApplication.run(DemoApplication.class, args);
     }
 

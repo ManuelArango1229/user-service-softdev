@@ -1,9 +1,15 @@
+logging:
+  level:
+    org.springframework.core.env: DEBUG
+
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-service:8761/eureka
   instance:
-    prefer-ip-address: false
+    instance-id: ${spring.application.name}:${POD_IP}:${server.port}
+    hostname: user-service
+    prefer-ip-address: false 
     health-check-url-path: /actuator/health
     status-page-url-path: /actuator/info
     lease-renewal-interval-in-seconds: 10
